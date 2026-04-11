@@ -1,5 +1,8 @@
 import { auth, signOut } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { prisma } from "@/lib/prisma";
+import { MatchCard } from "@/components/MatchCard";
+import { PastMatches } from "@/components/PastMatches";
 
 export default async function Home() {
 	const session = await auth();
@@ -7,6 +10,66 @@ export default async function Home() {
 	if (!session?.user) {
 		redirect("/login");
 	}
+
+	// Check if user is admin
+	const user = await prisma.user.findUnique({
+		where: { id: session.user.id },
+		select: { isAdmin: true },
+	});
+
+	const now = new Date();
+
+	// Fetch upcoming matches
+	const matches = await prisma.match.findMany({
+		where: {
+			scheduledAt: {
+				gte: now,
+			},
+		},
+		include: {
+			homeTeam: {
+				select: { name: true, code: true, flagUrl: true },
+			},
+			awayTeam: {
+				select: { name: true, code: true, flagUrl: true },
+			},
+			predictions: {
+				where: { userId: session.user.id },
+				select: { homeScore: true, awayScore: true, points: true },
+			},
+		},
+		orderBy: { scheduledAt: "asc" },
+	});
+
+	const matchesWithPredictions = matches.map((match) => ({
+		...match,
+		userPrediction: match.predictions[0] || null,
+	}));
+
+	// Fetch past finished matches
+	const pastMatches = await prisma.match.findMany({
+		where: {
+			isFinished: true,
+		},
+		include: {
+			homeTeam: {
+				select: { name: true, code: true, flagUrl: true },
+			},
+			awayTeam: {
+				select: { name: true, code: true, flagUrl: true },
+			},
+			predictions: {
+				where: { userId: session.user.id },
+				select: { homeScore: true, awayScore: true, points: true },
+			},
+		},
+		orderBy: { scheduledAt: "desc" },
+	});
+
+	const pastMatchesWithPredictions = pastMatches.map((match) => ({
+		...match,
+		userPrediction: match.predictions[0] || null,
+	}));
 
 	return (
 		<div className="min-h-screen bg-gray-50">
@@ -22,6 +85,14 @@ export default async function Home() {
 							<span className="text-sm text-gray-700">
 								{session.user.name || session.user.email}
 							</span>
+							{user?.isAdmin && (
+								<a
+									href="/admin"
+									className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition"
+								>
+									Admin
+								</a>
+							)}
 							<form
 								action={async () => {
 									"use server";
@@ -41,53 +112,54 @@ export default async function Home() {
 			</nav>
 
 			<main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-				<div className="bg-white rounded-lg shadow p-6">
-					<h2 className="text-3xl font-bold text-gray-900 mb-4">
-						Welcome to World Cup 2026 Predictions! 🎉
-					</h2>
-					<p className="text-gray-600 mb-6">
-						You're successfully logged in with Twitch. Here's what you can do:
-					</p>
+				{/* Past Matches Section */}
+				<PastMatches matches={pastMatchesWithPredictions} />
 
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-						<div className="border border-gray-200 rounded-lg p-6">
-							<h3 className="text-xl font-semibold text-gray-900 mb-2">
-								📊 Make Predictions
-							</h3>
-							<p className="text-gray-600 text-sm">
-								Predict match results before they start. Earn 3 points for exact
-								scores, 1 point for correct outcomes.
-							</p>
-						</div>
-
-						<div className="border border-gray-200 rounded-lg p-6">
-							<h3 className="text-xl font-semibold text-gray-900 mb-2">
-								🏆 Join Leagues
-							</h3>
-							<p className="text-gray-600 text-sm">
-								Create or join private leagues with friends. Compete on
-								leaderboards and see who's the best predictor!
-							</p>
-						</div>
-
-						<div className="border border-gray-200 rounded-lg p-6">
-							<h3 className="text-xl font-semibold text-gray-900 mb-2">
-								📈 Track Progress
-							</h3>
-							<p className="text-gray-600 text-sm">
-								View your ranking, total points, and prediction history across
-								all your leagues.
-							</p>
-						</div>
-					</div>
-
-					<div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-						<p className="text-blue-800 text-sm">
-							<strong>Coming soon:</strong> Matches, predictions, and league
-							management features are being built!
+				{/* Header */}
+				<div className="mb-8 flex justify-between items-center">
+					<div>
+						<h2 className="text-3xl font-bold text-gray-900 mb-2">
+							Upcoming Matches
+						</h2>
+						<p className="text-gray-600">
+							Make your predictions before the matches start!
 						</p>
 					</div>
+					<div className="flex gap-3">
+						<a
+							href="/leagues"
+							className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-bold shadow-lg transition flex items-center gap-2"
+						>
+							<span className="text-xl">👥</span>
+							Leagues
+						</a>
+						<a
+							href="/leaderboard"
+							className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-6 py-3 rounded-lg font-bold shadow-lg transition flex items-center gap-2"
+						>
+							<span className="text-xl">🏆</span>
+							Leaderboard
+						</a>
+					</div>
 				</div>
+
+				{/* Matches Grid */}
+				{matchesWithPredictions.length > 0 ? (
+					<div className="grid grid-cols-1 gap-4">
+						{matchesWithPredictions.map((match) => (
+							<MatchCard
+								key={match.id}
+								match={match}
+							/>
+						))}
+					</div>
+				) : (
+					<div className="bg-white rounded-lg shadow p-12 text-center">
+						<p className="text-gray-500 text-lg">
+							No upcoming matches in the next 7 days
+						</p>
+					</div>
+				)}
 			</main>
 		</div>
 	);
