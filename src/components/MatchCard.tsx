@@ -65,9 +65,17 @@ export function MatchCard({ match }: { match: Match }) {
 		}
 	};
 
+	const hasPrediction = match.userPrediction !== null;
+
 	return (
 		<>
-			<div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
+			<div
+				className={`bg-gray-800 rounded-lg p-6 hover:shadow-md transition ${
+					hasPrediction
+						? "border-2 border-green-500/50 shadow-lg shadow-green-500/20"
+						: "border border-gray-700"
+				}`}
+			>
 				{/* Match Header */}
 				<div className="flex justify-between items-center mb-4">
 					<div className="flex items-center gap-2">
@@ -113,7 +121,7 @@ export function MatchCard({ match }: { match: Match }) {
 					<div className="flex items-center gap-3 flex-1">
 						<span className="text-3xl">{match.homeTeam.flagUrl}</span>
 						<div>
-							<div className="font-semibold text-gray-900">
+							<div className="font-semibold text-gray-100">
 								{match.homeTeam.name}
 							</div>
 							<div className="text-xs text-gray-500">{match.homeTeam.code}</div>
@@ -123,7 +131,7 @@ export function MatchCard({ match }: { match: Match }) {
 					{/* Score Display or Input */}
 					<div className="flex items-center gap-4 px-6">
 						{match.isFinished ? (
-							<div className="text-3xl font-bold text-gray-900">
+							<div className="text-3xl font-bold text-gray-100">
 								{match.homeScore} - {match.awayScore}
 							</div>
 						) : canPredict ? (
@@ -137,7 +145,7 @@ export function MatchCard({ match }: { match: Match }) {
 									max="20"
 									value={homeScore}
 									onChange={(e) => setHomeScore(e.target.value)}
-									className="w-16 h-12 text-center text-xl font-bold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+									className="w-16 h-12 text-center text-xl font-bold border-2 border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none"
 									placeholder="0"
 									disabled={isSubmitting}
 								/>
@@ -148,7 +156,7 @@ export function MatchCard({ match }: { match: Match }) {
 									max="20"
 									value={awayScore}
 									onChange={(e) => setAwayScore(e.target.value)}
-									className="w-16 h-12 text-center text-xl font-bold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+									className="w-16 h-12 text-center text-xl font-bold border-2 border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none"
 									placeholder="0"
 									disabled={isSubmitting}
 								/>
@@ -172,7 +180,7 @@ export function MatchCard({ match }: { match: Match }) {
 					{/* Away Team */}
 					<div className="flex items-center gap-3 flex-1 justify-end">
 						<div className="text-right">
-							<div className="font-semibold text-gray-900">
+							<div className="font-semibold text-gray-100">
 								{match.awayTeam.name}
 							</div>
 							<div className="text-xs text-gray-500">{match.awayTeam.code}</div>

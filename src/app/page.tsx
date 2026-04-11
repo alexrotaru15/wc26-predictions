@@ -72,17 +72,17 @@ export default async function Home() {
 	}));
 
 	return (
-		<div className="min-h-screen bg-gray-50">
-			<nav className="bg-white shadow-sm">
+		<div className="min-h-screen bg-gray-900">
+			<nav className="bg-gray-800 shadow-sm border-b border-gray-700">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex justify-between items-center h-16">
 						<div className="flex items-center">
-							<h1 className="text-2xl font-bold text-gray-900">
+							<h1 className="text-2xl font-bold text-gray-100">
 								⚽ World Cup 2026
 							</h1>
 						</div>
 						<div className="flex items-center gap-4">
-							<span className="text-sm text-gray-700">
+							<span className="text-sm text-gray-300">
 								{session.user.name || session.user.email}
 							</span>
 							{user?.isAdmin && (
@@ -118,10 +118,10 @@ export default async function Home() {
 				{/* Header */}
 				<div className="mb-8 flex justify-between items-center">
 					<div>
-						<h2 className="text-3xl font-bold text-gray-900 mb-2">
+						<h2 className="text-3xl font-bold text-gray-100 mb-2">
 							Upcoming Matches
 						</h2>
-						<p className="text-gray-600">
+						<p className="text-gray-400">
 							Make your predictions before the matches start!
 						</p>
 					</div>
@@ -154,10 +154,9 @@ export default async function Home() {
 						))}
 					</div>
 				) : (
-					<div className="bg-white rounded-lg shadow p-12 text-center">
-						<p className="text-gray-500 text-lg">
-							No upcoming matches in the next 7 days
-						</p>
+					<div className="bg-gray-800 rounded-lg shadow p-12 text-center border border-gray-700">
+						<div className="text-4xl mb-4">⚽</div>
+						<p className="text-gray-400">No upcoming matches at the moment</p>
 					</div>
 				)}
 			</main>

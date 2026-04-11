@@ -27,19 +27,19 @@ export default async function CreateMatchPage() {
 	});
 
 	return (
-		<div className="min-h-screen bg-gray-50">
-			<nav className="bg-white shadow-sm">
+		<div className="min-h-screen bg-gray-900">
+			<nav className="bg-gray-800 shadow-sm">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex justify-between items-center h-16">
 						<div className="flex items-center gap-4">
 							<Link
 								href="/admin"
-								className="text-2xl font-bold text-gray-900 hover:text-gray-700"
+								className="text-2xl font-bold text-gray-100 hover:text-gray-300"
 							>
 								⚽ Admin Panel
 							</Link>
 							<span className="text-gray-400">→</span>
-							<span className="text-gray-600">Create Match</span>
+							<span className="text-gray-400">Create Match</span>
 						</div>
 					</div>
 				</div>
@@ -55,11 +55,11 @@ export default async function CreateMatchPage() {
 					</Link>
 				</div>
 
-				<div className="bg-white rounded-lg shadow p-8">
-					<h1 className="text-3xl font-bold text-gray-900 mb-2">
+				<div className="bg-gray-800 rounded-lg shadow p-8">
+					<h1 className="text-3xl font-bold text-gray-100 mb-2">
 						Create New Match
 					</h1>
-					<p className="text-gray-600 mb-8">
+					<p className="text-gray-400 mb-8">
 						Create a new match for knockout stages or future group matches
 					</p>
 

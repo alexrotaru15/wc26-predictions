@@ -41,14 +41,14 @@ export default async function AdminPage() {
 	const pastMatches = matches.filter((m) => new Date(m.scheduledAt) <= now);
 
 	return (
-		<div className="min-h-screen bg-gray-50">
-			<nav className="bg-white shadow-sm border-b-4 border-red-600">
+		<div className="min-h-screen bg-gray-900">
+			<nav className="bg-gray-800 shadow-sm border-b-4 border-red-600">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex justify-between items-center h-16">
 						<div className="flex items-center gap-4">
 							<Link
 								href="/"
-								className="text-2xl font-bold text-gray-900 hover:text-gray-700"
+								className="text-2xl font-bold text-gray-100 hover:text-gray-300"
 							>
 								⚽ World Cup 2026
 							</Link>
@@ -59,7 +59,7 @@ export default async function AdminPage() {
 						<div className="flex items-center gap-4">
 							<Link
 								href="/leaderboard"
-								className="text-sm text-gray-600 hover:text-gray-900 font-medium flex items-center gap-1"
+								className="text-sm text-gray-400 hover:text-gray-100 font-medium flex items-center gap-1"
 							>
 								🏆 Leaderboard
 							</Link>
@@ -78,10 +78,10 @@ export default async function AdminPage() {
 				{/* Header */}
 				<div className="mb-8 flex justify-between items-start">
 					<div>
-						<h1 className="text-3xl font-bold text-gray-900 mb-2">
+						<h1 className="text-3xl font-bold text-gray-100 mb-2">
 							Admin Dashboard
 						</h1>
-						<p className="text-gray-600">
+						<p className="text-gray-400">
 							Manage matches, add results, and oversee the tournament
 						</p>
 					</div>
@@ -121,13 +121,13 @@ export default async function AdminPage() {
 				</div>
 
 				{/* Tabs */}
-				<div className="bg-white rounded-lg shadow">
-					<div className="border-b border-gray-200">
+				<div className="bg-gray-800 rounded-lg shadow">
+					<div className="border-b border-gray-700">
 						<nav className="flex -mb-px">
 							<button className="border-b-2 border-blue-600 text-blue-600 px-6 py-4 font-medium">
 								Past Matches ({pastMatches.length})
 							</button>
-							<button className="border-b-2 border-transparent text-gray-500 hover:text-gray-700 px-6 py-4 font-medium">
+							<button className="border-b-2 border-transparent text-gray-500 hover:text-gray-300 px-6 py-4 font-medium">
 								Upcoming Matches ({upcomingMatches.length})
 							</button>
 						</nav>
@@ -136,7 +136,7 @@ export default async function AdminPage() {
 					{/* Past Matches Table */}
 					<div className="overflow-x-auto">
 						<table className="w-full">
-							<thead className="bg-gray-50">
+							<thead className="bg-gray-900">
 								<tr>
 									<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
 										Date
@@ -158,11 +158,11 @@ export default async function AdminPage() {
 									</th>
 								</tr>
 							</thead>
-							<tbody className="bg-white divide-y divide-gray-200">
+							<tbody className="bg-gray-800 divide-y divide-gray-200">
 								{pastMatches.map((match) => (
 									<tr
 										key={match.id}
-										className="hover:bg-gray-50"
+										className="hover:bg-gray-900"
 									>
 										<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 											{new Date(match.scheduledAt).toLocaleDateString("ro-RO", {

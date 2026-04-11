@@ -79,7 +79,7 @@ export function GroupLeaderboard({
 			onClick={onClose}
 		>
 			<div
-				className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden"
+				className="bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden"
 				onClick={(e) => e.stopPropagation()}
 			>
 				{/* Header */}
@@ -87,7 +87,7 @@ export function GroupLeaderboard({
 					<h3 className="text-xl font-bold">Group {group} Standings</h3>
 					<button
 						onClick={onClose}
-						className="text-white hover:text-gray-200 text-2xl font-bold"
+						className="text-white hover:text-gray-700 text-2xl font-bold"
 					>
 						×
 					</button>
@@ -101,7 +101,7 @@ export function GroupLeaderboard({
 						</div>
 					) : standings.length > 0 ? (
 						<table className="w-full">
-							<thead className="bg-gray-50 sticky top-0">
+							<thead className="bg-gray-900 sticky top-0">
 								<tr>
 									<th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
 										Pos
@@ -135,14 +135,14 @@ export function GroupLeaderboard({
 									</th>
 								</tr>
 							</thead>
-							<tbody className="bg-white divide-y divide-gray-200">
+							<tbody className="bg-gray-800 divide-y divide-gray-200">
 								{standings.map((team) => (
 									<tr
 										key={team.rank}
-										className="hover:bg-gray-50 transition"
+										className="hover:bg-gray-900 transition"
 									>
 										<td className="px-4 py-3 whitespace-nowrap">
-											<span className="text-sm font-bold text-gray-700">
+											<span className="text-sm font-bold text-gray-300">
 												{team.rank}
 											</span>
 										</td>
@@ -150,31 +150,31 @@ export function GroupLeaderboard({
 											<div className="flex items-center gap-2">
 												<span className="text-2xl">{team.teamFlag}</span>
 												<div>
-													<div className="text-sm font-medium text-gray-900">
+													<div className="text-sm font-medium text-gray-100">
 														{team.teamCode}
 													</div>
 												</div>
 											</div>
 										</td>
-										<td className="px-4 py-3 text-center text-sm text-gray-700">
+										<td className="px-4 py-3 text-center text-sm text-gray-300">
 											{team.played}
 										</td>
-										<td className="px-4 py-3 text-center text-sm text-gray-700">
+										<td className="px-4 py-3 text-center text-sm text-gray-300">
 											{team.won}
 										</td>
-										<td className="px-4 py-3 text-center text-sm text-gray-700">
+										<td className="px-4 py-3 text-center text-sm text-gray-300">
 											{team.drawn}
 										</td>
-										<td className="px-4 py-3 text-center text-sm text-gray-700">
+										<td className="px-4 py-3 text-center text-sm text-gray-300">
 											{team.lost}
 										</td>
-										<td className="px-4 py-3 text-center text-sm text-gray-700">
+										<td className="px-4 py-3 text-center text-sm text-gray-300">
 											{team.goalsFor}
 										</td>
-										<td className="px-4 py-3 text-center text-sm text-gray-700">
+										<td className="px-4 py-3 text-center text-sm text-gray-300">
 											{team.goalsAgainst}
 										</td>
-										<td className="px-4 py-3 text-center text-sm font-medium text-gray-900">
+										<td className="px-4 py-3 text-center text-sm font-medium text-gray-100">
 											{team.goalDifference > 0 ? "+" : ""}
 											{team.goalDifference}
 										</td>
@@ -195,8 +195,8 @@ export function GroupLeaderboard({
 
 					{/* Matches Section */}
 					{matches.length > 0 && (
-						<div className="border-t border-gray-200 p-6">
-							<h4 className="text-lg font-bold text-gray-900 mb-4">
+						<div className="border-t border-gray-700 p-6">
+							<h4 className="text-lg font-bold text-gray-100 mb-4">
 								Group Matches
 							</h4>
 							<div className="space-y-3">
@@ -205,7 +205,7 @@ export function GroupLeaderboard({
 									return (
 										<div
 											key={match.id}
-											className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
+											className="flex items-center justify-between p-4 bg-gray-900 rounded-lg"
 										>
 											{/* Teams */}
 											<div className="flex items-center gap-4 flex-1">

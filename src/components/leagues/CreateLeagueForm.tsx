@@ -47,7 +47,7 @@ export function CreateLeagueForm({ userId }: { userId: string }) {
 			className="space-y-4"
 		>
 			<div>
-				<label className="block text-sm font-medium text-gray-700 mb-1">
+				<label className="block text-sm font-medium text-gray-300 mb-1">
 					League Name *
 				</label>
 				<input
@@ -55,7 +55,7 @@ export function CreateLeagueForm({ userId }: { userId: string }) {
 					value={name}
 					onChange={(e) => setName(e.target.value)}
 					placeholder="e.g., Friends League"
-					className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+					className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					disabled={isSubmitting}
 					maxLength={50}
 					required
@@ -63,7 +63,13 @@ export function CreateLeagueForm({ userId }: { userId: string }) {
 			</div>
 
 			{message && (
-				<div className="p-3 rounded-lg bg-blue-50 border border-blue-200">
+				<div
+					className={`p-3 rounded-lg ${
+						message.startsWith("✅")
+							? "bg-green-900/50 border border-green-500/50 text-green-100"
+							: "bg-red-900/50 border border-red-500/50 text-red-100"
+					}`}
+				>
 					<p className="text-sm font-medium text-center">{message}</p>
 				</div>
 			)}

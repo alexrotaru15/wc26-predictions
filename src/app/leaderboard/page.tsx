@@ -90,20 +90,20 @@ export default async function LeaderboardPage() {
 	);
 
 	return (
-		<div className="min-h-screen bg-gray-50">
-			<nav className="bg-white shadow-sm">
+		<div className="min-h-screen bg-gray-900">
+			<nav className="bg-gray-800 shadow-sm">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex justify-between items-center h-16">
 						<div className="flex items-center">
 							<Link
 								href="/"
-								className="text-2xl font-bold text-gray-900 hover:text-gray-700"
+								className="text-2xl font-bold text-gray-100 hover:text-gray-300"
 							>
 								⚽ World Cup 2026
 							</Link>
 						</div>
 						<div className="flex items-center gap-4">
-							<span className="text-sm text-gray-700">
+							<span className="text-sm text-gray-300">
 								{session.user.name || session.user.email}
 							</span>
 							{user?.isAdmin && (
@@ -141,10 +141,10 @@ export default async function LeaderboardPage() {
 					>
 						← Back to Dashboard
 					</Link>
-					<h1 className="text-3xl font-bold text-gray-900 mb-2">
+					<h1 className="text-3xl font-bold text-gray-100 mb-2">
 						🏆 Global Leaderboard
 					</h1>
-					<p className="text-gray-600">
+					<p className="text-gray-400">
 						See how you rank against all players worldwide
 					</p>
 				</div>
@@ -155,7 +155,9 @@ export default async function LeaderboardPage() {
 						<div className="flex items-center justify-between">
 							<div>
 								<div className="text-sm opacity-90 mb-1">Your Rank</div>
-								<div className="text-4xl font-bold">#{currentUserRank.rank}</div>
+								<div className="text-4xl font-bold">
+									#{currentUserRank.rank}
+								</div>
 							</div>
 							<div className="text-right">
 								<div className="text-sm opacity-90 mb-1">Total Points</div>
@@ -180,10 +182,10 @@ export default async function LeaderboardPage() {
 				)}
 
 				{/* Leaderboard Table */}
-				<div className="bg-white rounded-lg shadow overflow-hidden">
+				<div className="bg-gray-800 rounded-lg shadow overflow-hidden">
 					{leaderboard.length > 0 ? (
 						<table className="w-full">
-							<thead className="bg-gray-50">
+							<thead className="bg-gray-900">
 								<tr>
 									<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 										Rank
@@ -205,7 +207,7 @@ export default async function LeaderboardPage() {
 									</th>
 								</tr>
 							</thead>
-							<tbody className="bg-white divide-y divide-gray-200">
+							<tbody className="bg-gray-800 divide-y divide-gray-200">
 								{leaderboard.map((entry) => {
 									const isCurrentUser = entry.userId === session.user.id;
 									return (
@@ -213,8 +215,8 @@ export default async function LeaderboardPage() {
 											key={entry.userId}
 											className={`${
 												isCurrentUser
-													? "bg-blue-50 border-l-4 border-blue-600"
-													: "hover:bg-gray-50"
+													? "bg-blue-900/30 border-l-4 border-blue-500"
+													: "hover:bg-gray-900"
 											} transition`}
 										>
 											<td className="px-6 py-4 whitespace-nowrap">
@@ -244,10 +246,10 @@ export default async function LeaderboardPage() {
 														/>
 													)}
 													<div>
-														<div className="text-sm font-medium text-gray-900">
+														<div className="text-sm font-medium text-gray-100">
 															{entry.userName}
 															{isCurrentUser && (
-																<span className="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+																<span className="ml-2 text-xs bg-blue-500/20 text-blue-300 border border-blue-500/50 px-2 py-1 rounded-full font-semibold">
 																	You
 																</span>
 															)}
@@ -260,10 +262,10 @@ export default async function LeaderboardPage() {
 													{entry.points}
 												</span>
 											</td>
-											<td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900 font-medium">
+											<td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-100 font-medium">
 												{entry.correctScores}
 											</td>
-											<td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900 font-medium">
+											<td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-100 font-medium">
 												{entry.correctOutcomes}
 											</td>
 											<td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">

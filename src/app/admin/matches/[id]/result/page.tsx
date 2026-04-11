@@ -48,12 +48,12 @@ export default async function MatchResultPage({
 	}
 
 	return (
-		<div className="min-h-screen bg-gray-50">
-			<nav className="bg-white shadow-sm border-b-4 border-red-600">
+		<div className="min-h-screen bg-gray-900">
+			<nav className="bg-gray-800 shadow-sm border-b-4 border-red-600">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex justify-between items-center h-16">
 						<div className="flex items-center gap-4">
-							<h1 className="text-2xl font-bold text-gray-900">
+							<h1 className="text-2xl font-bold text-gray-100">
 								⚽ World Cup 2026
 							</h1>
 							<span className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold">
@@ -74,13 +74,13 @@ export default async function MatchResultPage({
 					</a>
 				</div>
 
-				<div className="bg-white rounded-lg shadow p-6">
-					<h2 className="text-2xl font-bold text-gray-900 mb-6">
+				<div className="bg-gray-800 rounded-lg shadow p-6">
+					<h2 className="text-2xl font-bold text-gray-100 mb-6">
 						{match.isFinished ? "Edit Match Result" : "Add Match Result"}
 					</h2>
 
 					{/* Match Info */}
-					<div className="bg-gray-50 rounded-lg p-6 mb-6">
+					<div className="bg-gray-900 rounded-lg p-6 mb-6">
 						<div className="flex items-center justify-between mb-4">
 							<div className="flex items-center gap-3">
 								<span className="text-4xl">{match.homeTeam.flagUrl}</span>
@@ -105,7 +105,7 @@ export default async function MatchResultPage({
 							</div>
 						</div>
 
-						<div className="text-center text-sm text-gray-600">
+						<div className="text-center text-sm text-gray-400">
 							{new Date(match.scheduledAt).toLocaleString("ro-RO", {
 								dateStyle: "full",
 								timeStyle: "short",

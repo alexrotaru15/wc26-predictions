@@ -14,23 +14,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			if (!account) return false;
 
 			try {
-				// Check if user exists
-				let dbUser = await prisma.user.findUnique({
-					where: { email: user.email! },
-				});
-
-				if (!dbUser) {
-					// Create new user
-					dbUser = await prisma.user.create({
-						data: {
-							email: user.email!,
-							name: user.name,
-							image: user.image,
-						},
-					});
-				}
-
-				// Check if account is linked
+				// Check if account already exists (find by Twitch ID)
 				const existingAccount = await prisma.account.findUnique({
 					where: {
 						provider_providerAccountId: {
@@ -38,26 +22,40 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 							providerAccountId: account.providerAccountId,
 						},
 					},
+					include: {
+						user: true,
+					},
 				});
 
-				if (!existingAccount) {
-					// Link account to user
-					await prisma.account.create({
-						data: {
-							userId: dbUser.id,
-							type: account.type,
-							provider: account.provider,
-							providerAccountId: account.providerAccountId,
-							refresh_token: account.refresh_token,
-							access_token: account.access_token,
-							expires_at: account.expires_at,
-							token_type: account.token_type,
-							scope: account.scope,
-							id_token: account.id_token,
-							session_state: account.session_state,
-						},
-					});
+				if (existingAccount) {
+					// User already exists, just return true
+					return true;
 				}
+
+				// Account doesn't exist, create new user and link account
+				const dbUser = await prisma.user.create({
+					data: {
+						email: user.email || null,
+						name: user.name,
+						image: user.image,
+						accounts: {
+							create: {
+								type: account.type,
+								provider: account.provider,
+								providerAccountId: account.providerAccountId,
+								refresh_token: account.refresh_token,
+								access_token: account.access_token,
+								expires_at: account.expires_at,
+								token_type: account.token_type,
+								scope: account.scope,
+								id_token: account.id_token,
+								session_state: account.session_state
+									? String(account.session_state)
+									: null,
+							},
+						},
+					},
+				});
 
 				return true;
 			} catch (error) {
@@ -65,22 +63,32 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 				return false;
 			}
 		},
-		async session({ session, token }) {
-			if (session.user && token.sub) {
-				const dbUser = await prisma.user.findUnique({
-					where: { email: session.user.email! },
+		async jwt({ token, account, profile }) {
+			if (account) {
+				// When user first signs in, find their user ID via the account
+				const dbAccount = await prisma.account.findUnique({
+					where: {
+						provider_providerAccountId: {
+							provider: account.provider,
+							providerAccountId: account.providerAccountId,
+						},
+					},
+					select: {
+						userId: true,
+					},
 				});
-				if (dbUser) {
-					session.user.id = dbUser.id;
+
+				if (dbAccount) {
+					token.userId = dbAccount.userId;
 				}
 			}
-			return session;
-		},
-		async jwt({ token, user, account }) {
-			if (user) {
-				token.id = user.id;
-			}
 			return token;
+		},
+		async session({ session, token }) {
+			if (token.userId) {
+				session.user.id = token.userId as string;
+			}
+			return session;
 		},
 	},
 	pages: {

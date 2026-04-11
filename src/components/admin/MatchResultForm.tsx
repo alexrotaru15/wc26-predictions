@@ -21,12 +21,8 @@ type Match = {
 };
 
 export function MatchResultForm({ match }: { match: Match }) {
-	const [homeScore, setHomeScore] = useState(
-		match.homeScore?.toString() || "",
-	);
-	const [awayScore, setAwayScore] = useState(
-		match.awayScore?.toString() || "",
-	);
+	const [homeScore, setHomeScore] = useState(match.homeScore?.toString() || "");
+	const [awayScore, setAwayScore] = useState(match.awayScore?.toString() || "");
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [message, setMessage] = useState("");
 
@@ -68,7 +64,7 @@ export function MatchResultForm({ match }: { match: Match }) {
 	return (
 		<form onSubmit={handleSubmit}>
 			<div className="mb-6">
-				<label className="block text-sm font-medium text-gray-700 mb-4">
+				<label className="block text-sm font-medium text-gray-300 mb-4">
 					Final Score
 				</label>
 				<div className="flex items-center justify-center gap-6">
@@ -82,7 +78,7 @@ export function MatchResultForm({ match }: { match: Match }) {
 							max="20"
 							value={homeScore}
 							onChange={(e) => setHomeScore(e.target.value)}
-							className="w-24 h-16 text-center text-3xl font-bold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+							className="w-24 h-16 text-center text-3xl font-bold border-2 border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none"
 							placeholder="0"
 							disabled={isSubmitting}
 							required
@@ -101,7 +97,7 @@ export function MatchResultForm({ match }: { match: Match }) {
 							max="20"
 							value={awayScore}
 							onChange={(e) => setAwayScore(e.target.value)}
-							className="w-24 h-16 text-center text-3xl font-bold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+							className="w-24 h-16 text-center text-3xl font-bold border-2 border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none"
 							placeholder="0"
 							disabled={isSubmitting}
 							required
@@ -111,12 +107,18 @@ export function MatchResultForm({ match }: { match: Match }) {
 			</div>
 
 			{/* Scoring Rules */}
-			<div className="bg-gray-50 rounded-lg p-4 mb-6">
-				<h3 className="font-semibold text-gray-900 mb-2">Scoring Rules:</h3>
-				<ul className="text-sm text-gray-600 space-y-1">
-					<li>• <strong>3 points</strong> - Exact score prediction</li>
-					<li>• <strong>1 point</strong> - Correct outcome (win/draw/loss)</li>
-					<li>• <strong>0 points</strong> - Incorrect prediction</li>
+			<div className="bg-gray-900 rounded-lg p-4 mb-6">
+				<h3 className="font-semibold text-gray-100 mb-2">Scoring Rules:</h3>
+				<ul className="text-sm text-gray-400 space-y-1">
+					<li>
+						• <strong>3 points</strong> - Exact score prediction
+					</li>
+					<li>
+						• <strong>1 point</strong> - Correct outcome (win/draw/loss)
+					</li>
+					<li>
+						• <strong>0 points</strong> - Incorrect prediction
+					</li>
 				</ul>
 			</div>
 
@@ -141,7 +143,7 @@ export function MatchResultForm({ match }: { match: Match }) {
 
 				<a
 					href="/admin"
-					className="px-6 py-3 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition"
+					className="px-6 py-3 border border-gray-600 rounded-lg font-medium text-gray-300 hover:bg-gray-900 transition"
 				>
 					Cancel
 				</a>
@@ -150,12 +152,12 @@ export function MatchResultForm({ match }: { match: Match }) {
 			{/* Predictions Preview */}
 			{match.predictions.length > 0 && (
 				<div className="mt-8 border-t pt-6">
-					<h3 className="font-semibold text-gray-900 mb-4">
+					<h3 className="font-semibold text-gray-100 mb-4">
 						Predictions ({match.predictions.length})
 					</h3>
 					<div className="max-h-64 overflow-y-auto">
 						<table className="w-full text-sm">
-							<thead className="bg-gray-50 sticky top-0">
+							<thead className="bg-gray-900 sticky top-0">
 								<tr>
 									<th className="px-4 py-2 text-left">User</th>
 									<th className="px-4 py-2 text-center">Prediction</th>

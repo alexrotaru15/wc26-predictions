@@ -40,20 +40,20 @@ export default async function LeaguesPage() {
 	});
 
 	return (
-		<div className="min-h-screen bg-gray-50">
-			<nav className="bg-white shadow-sm">
+		<div className="min-h-screen bg-gray-900">
+			<nav className="bg-gray-800 shadow-sm">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex justify-between items-center h-16">
 						<div className="flex items-center">
 							<Link
 								href="/"
-								className="text-2xl font-bold text-gray-900 hover:text-gray-700"
+								className="text-2xl font-bold text-gray-100 hover:text-gray-300"
 							>
 								⚽ World Cup 2026
 							</Link>
 						</div>
 						<div className="flex items-center gap-4">
-							<span className="text-sm text-gray-700">
+							<span className="text-sm text-gray-300">
 								{session.user.name || session.user.email}
 							</span>
 							{user?.isAdmin && (
@@ -91,10 +91,10 @@ export default async function LeaguesPage() {
 					>
 						← Back to Dashboard
 					</Link>
-					<h1 className="text-3xl font-bold text-gray-900 mb-2">
+					<h1 className="text-3xl font-bold text-gray-100 mb-2">
 						🏆 My Leagues
 					</h1>
-					<p className="text-gray-600">
+					<p className="text-gray-400">
 						Create private leagues and compete with friends
 					</p>
 				</div>
@@ -102,7 +102,7 @@ export default async function LeaguesPage() {
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 					{/* Left Column - My Leagues */}
 					<div className="lg:col-span-2">
-						<h2 className="text-xl font-bold text-gray-900 mb-4">
+						<h2 className="text-xl font-bold text-gray-100 mb-4">
 							Your Leagues ({userLeagues.length})
 						</h2>
 
@@ -116,7 +116,7 @@ export default async function LeaguesPage() {
 								))}
 							</div>
 						) : (
-							<div className="bg-white rounded-lg shadow p-12 text-center">
+							<div className="bg-gray-800 rounded-lg shadow p-12 text-center">
 								<div className="text-4xl mb-4">🏆</div>
 								<p className="text-gray-500 mb-4">
 									You haven't joined any leagues yet
@@ -131,16 +131,16 @@ export default async function LeaguesPage() {
 					{/* Right Column - Create & Join */}
 					<div className="space-y-6">
 						{/* Create League */}
-						<div className="bg-white rounded-lg shadow p-6">
-							<h3 className="text-lg font-bold text-gray-900 mb-4">
+						<div className="bg-gray-800 rounded-lg shadow p-6">
+							<h3 className="text-lg font-bold text-gray-100 mb-4">
 								Create League
 							</h3>
 							<CreateLeagueForm userId={session.user.id} />
 						</div>
 
 						{/* Join League */}
-						<div className="bg-white rounded-lg shadow p-6">
-							<h3 className="text-lg font-bold text-gray-900 mb-4">
+						<div className="bg-gray-800 rounded-lg shadow p-6">
+							<h3 className="text-lg font-bold text-gray-100 mb-4">
 								Join League
 							</h3>
 							<JoinLeagueForm userId={session.user.id} />
