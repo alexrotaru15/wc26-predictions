@@ -76,13 +76,22 @@ export default async function AdminPage() {
 
 			<main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 				{/* Header */}
-				<div className="mb-8">
-					<h1 className="text-3xl font-bold text-gray-900 mb-2">
-						Admin Dashboard
-					</h1>
-					<p className="text-gray-600">
-						Manage matches, add results, and create new matches
-					</p>
+				<div className="mb-8 flex justify-between items-start">
+					<div>
+						<h1 className="text-3xl font-bold text-gray-900 mb-2">
+							Admin Dashboard
+						</h1>
+						<p className="text-gray-600">
+							Manage matches, add results, and oversee the tournament
+						</p>
+					</div>
+					<a
+						href="/admin/matches/create"
+						className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium shadow-lg transition flex items-center gap-2"
+					>
+						<span className="text-xl">➕</span>
+						Create Match
+					</a>
 				</div>
 
 				{/* Quick Actions */}
