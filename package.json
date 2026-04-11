@@ -7,6 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "eslint",
+		"postinstall": "prisma generate",
 		"seed": "tsx scripts/seed-teams-and-matches.ts",
 		"make-admin": "tsx scripts/make-admin.ts"
 	},
