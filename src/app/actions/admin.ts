@@ -121,7 +121,7 @@ export async function createMatch({
 	scheduledAt,
 	group,
 }: {
-	stage: "GROUP" | "ROUND_16" | "QUARTER" | "SEMI" | "FINAL";
+	stage: "GROUP" | "ROUND_32" | "ROUND_16" | "QUARTER" | "SEMI" | "FINAL";
 	homeTeamId: string;
 	awayTeamId: string;
 	scheduledAt: Date;

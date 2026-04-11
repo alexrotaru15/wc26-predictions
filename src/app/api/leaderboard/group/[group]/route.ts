@@ -3,10 +3,10 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(
 	request: NextRequest,
-	{ params }: { params: { group: string } },
+	{ params }: { params: Promise<{ group: string }> },
 ) {
 	try {
-		const group = params.group;
+		const { group } = await params;
 
 		// Get all finished matches for this group
 		const matches = await prisma.match.findMany({
