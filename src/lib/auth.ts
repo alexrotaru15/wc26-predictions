@@ -11,9 +11,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 	],
 	callbacks: {
 		async signIn({ user, account, profile }) {
-			if (!account) return false;
+			if (!account) {
+				console.error("signIn: No account provided");
+				return false;
+			}
 
 			try {
+				console.log("signIn: Checking for existing account", {
+					provider: account.provider,
+					providerAccountId: account.providerAccountId,
+				});
+
 				// Check if account already exists (find by Twitch ID)
 				const existingAccount = await prisma.account.findUnique({
 					where: {
@@ -28,9 +36,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 				});
 
 				if (existingAccount) {
-					// User already exists, just return true
+					console.log("signIn: Existing account found, allowing login");
 					return true;
 				}
+
+				console.log("signIn: Creating new user and account");
 
 				// Account doesn't exist, create new user and link account
 				const dbUser = await prisma.user.create({
@@ -57,9 +67,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 					},
 				});
 
+				console.log("signIn: New user created successfully");
 				return true;
 			} catch (error) {
 				console.error("Error in signIn callback:", error);
+				console.error("Error details:", JSON.stringify(error, null, 2));
 				return false;
 			}
 		},
