@@ -25,8 +25,10 @@ export default function RootLayout({ children }) {
 		>
 			<body className="min-h-full flex flex-col relative">
 				{children}
-				<div className="fixed bottom-4 left-4 text-gray-600 text-xs font-mono opacity-50 hover:opacity-100 transition-opacity">
-					YNWA
+				<div className="fixed bottom-4 left-4 text-xs font-bold tracking-widest opacity-30 hover:opacity-90 transition-all duration-300 select-none">
+					<span className="bg-gradient-to-r from-red-600 via-red-500 to-red-400 bg-clip-text text-transparent drop-shadow-sm">
+						YNWA
+					</span>
 				</div>
 			</body>
 		</html>
