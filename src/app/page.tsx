@@ -116,28 +116,28 @@ export default async function Home() {
 				<PastMatches matches={pastMatchesWithPredictions} />
 
 				{/* Header */}
-				<div className="mb-8 flex justify-between items-center">
+				<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
 					<div>
-						<h2 className="text-3xl font-bold text-gray-100 mb-2">
+						<h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-2">
 							Upcoming Matches
 						</h2>
-						<p className="text-gray-400">
+						<p className="text-sm sm:text-base text-gray-400">
 							Make your predictions before the matches start!
 						</p>
 					</div>
-					<div className="flex gap-3">
+					<div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
 						<a
 							href="/leagues"
-							className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-bold shadow-lg transition flex items-center gap-2"
+							className="flex-1 sm:flex-none bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-bold shadow-lg transition flex items-center justify-center gap-2 text-sm sm:text-base"
 						>
-							<span className="text-xl">👥</span>
+							<span className="text-lg sm:text-xl">👥</span>
 							Leagues
 						</a>
 						<a
 							href="/leaderboard"
-							className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-6 py-3 rounded-lg font-bold shadow-lg transition flex items-center gap-2"
+							className="flex-1 sm:flex-none bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-bold shadow-lg transition flex items-center justify-center gap-2 text-sm sm:text-base"
 						>
-							<span className="text-xl">🏆</span>
+							<span className="text-lg sm:text-xl">🏆</span>
 							Leaderboard
 						</a>
 					</div>

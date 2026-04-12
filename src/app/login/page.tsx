@@ -6,15 +6,13 @@ export default async function LoginPage() {
 		<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-blue-600">
 			<div className="bg-gray-800 p-8 rounded-lg shadow-2xl max-w-md w-full">
 				<div className="text-center mb-8">
-					<h1 className="text-4xl font-bold text-gray-800 mb-2">
-						World Cup 2026
-					</h1>
-					<p className="text-gray-400">Predictions League</p>
+					<h1 className="text-4xl font-bold text-white mb-2">World Cup 2026</h1>
+					<p className="text-gray-300">Predictions League</p>
 				</div>
 
 				<div className="mb-6">
-					<div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
-						<p className="text-sm text-blue-700">
+					<div className="bg-blue-900/30 border-l-4 border-blue-500 p-4 mb-4">
+						<p className="text-sm text-blue-200">
 							Sign in with your Twitch account to join prediction leagues and
 							compete with friends!
 						</p>

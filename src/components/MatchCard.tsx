@@ -70,14 +70,14 @@ export function MatchCard({ match }: { match: Match }) {
 	return (
 		<>
 			<div
-				className={`bg-gray-800 rounded-lg p-6 hover:shadow-md transition ${
+				className={`bg-gray-800 rounded-lg p-4 sm:p-6 hover:shadow-md transition ${
 					hasPrediction
 						? "border-2 border-green-500/50 shadow-lg shadow-green-500/20"
 						: "border border-gray-700"
 				}`}
 			>
 				{/* Match Header */}
-				<div className="flex justify-between items-center mb-4">
+				<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
 					<div className="flex items-center gap-2">
 						{isGroupStage && match.group && (
 							<>
@@ -105,7 +105,7 @@ export function MatchCard({ match }: { match: Match }) {
 							</>
 						)}
 					</div>
-					<div className="text-sm text-gray-500">
+					<div className="text-xs sm:text-sm text-gray-500">
 						{matchDate.toLocaleDateString("ro-RO", {
 							day: "numeric",
 							month: "short",
@@ -116,12 +116,14 @@ export function MatchCard({ match }: { match: Match }) {
 				</div>
 
 				{/* Teams */}
-				<div className="flex items-center justify-between mb-6">
+				<div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
 					{/* Home Team */}
-					<div className="flex items-center gap-3 flex-1">
-						<span className="text-3xl">{match.homeTeam.flagUrl}</span>
-						<div>
-							<div className="font-semibold text-gray-100">
+					<div className="flex items-center gap-2 sm:gap-3 flex-1 w-full sm:w-auto">
+						<span className="text-2xl sm:text-3xl">
+							{match.homeTeam.flagUrl}
+						</span>
+						<div className="flex-1 sm:flex-none">
+							<div className="font-semibold text-sm sm:text-base text-gray-100">
 								{match.homeTeam.name}
 							</div>
 							<div className="text-xs text-gray-500">{match.homeTeam.code}</div>
@@ -129,7 +131,7 @@ export function MatchCard({ match }: { match: Match }) {
 					</div>
 
 					{/* Score Display or Input */}
-					<div className="flex items-center gap-4 px-6">
+					<div className="flex items-center gap-2 sm:gap-4 px-2 sm:px-6 w-full sm:w-auto justify-center">
 						{match.isFinished ? (
 							<div className="text-3xl font-bold text-gray-100">
 								{match.homeScore} - {match.awayScore}
@@ -145,25 +147,27 @@ export function MatchCard({ match }: { match: Match }) {
 									max="20"
 									value={homeScore}
 									onChange={(e) => setHomeScore(e.target.value)}
-									className="w-16 h-12 text-center text-xl font-bold border-2 border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none"
+									className="w-12 sm:w-16 h-10 sm:h-12 text-center text-lg sm:text-xl font-bold border-2 border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none"
 									placeholder="0"
 									disabled={isSubmitting}
 								/>
-								<span className="text-2xl font-bold text-gray-400">-</span>
+								<span className="text-xl sm:text-2xl font-bold text-gray-400">
+									-
+								</span>
 								<input
 									type="number"
 									min="0"
 									max="20"
 									value={awayScore}
 									onChange={(e) => setAwayScore(e.target.value)}
-									className="w-16 h-12 text-center text-xl font-bold border-2 border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none"
+									className="w-12 sm:w-16 h-10 sm:h-12 text-center text-lg sm:text-xl font-bold border-2 border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none"
 									placeholder="0"
 									disabled={isSubmitting}
 								/>
 								<button
 									type="submit"
 									disabled={isSubmitting || !homeScore || !awayScore}
-									className="ml-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-4 py-2 rounded-lg font-medium transition"
+									className="ml-1 sm:ml-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-sm sm:text-base font-medium transition"
 								>
 									{isSubmitting ? "..." : "Save"}
 								</button>
@@ -178,14 +182,16 @@ export function MatchCard({ match }: { match: Match }) {
 					</div>
 
 					{/* Away Team */}
-					<div className="flex items-center gap-3 flex-1 justify-end">
-						<div className="text-right">
-							<div className="font-semibold text-gray-100">
+					<div className="flex items-center gap-2 sm:gap-3 flex-1 justify-end w-full sm:w-auto">
+						<div className="text-right flex-1 sm:flex-none">
+							<div className="font-semibold text-sm sm:text-base text-gray-100">
 								{match.awayTeam.name}
 							</div>
 							<div className="text-xs text-gray-500">{match.awayTeam.code}</div>
 						</div>
-						<span className="text-3xl">{match.awayTeam.flagUrl}</span>
+						<span className="text-2xl sm:text-3xl">
+							{match.awayTeam.flagUrl}
+						</span>
 					</div>
 				</div>
 
