@@ -71,6 +71,14 @@ export default async function Home() {
 		userPrediction: match.predictions[0] || null,
 	}));
 
+	// Fetch user's leagues (max 3)
+	const userLeagues = await prisma.leagueMember.findMany({
+		where: { userId: session.user.id },
+		include: { league: { select: { id: true, name: true } } },
+		take: 3,
+		orderBy: { joinedAt: "asc" },
+	});
+
 	return (
 		<div className="min-h-screen bg-gray-900">
 			<nav className="bg-gray-800 shadow-sm border-b border-gray-700">
@@ -142,6 +150,27 @@ export default async function Home() {
 						</a>
 					</div>
 				</div>
+
+				{/* My Leagues */}
+				{userLeagues.length > 0 && (
+					<div className="mb-6">
+						<h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">
+							My Leagues
+						</h3>
+						<div className="flex flex-wrap gap-2">
+							{userLeagues.map(({ league }) => (
+								<a
+									key={league.id}
+									href={`/leagues/${league.id}`}
+									className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-purple-500 text-gray-200 px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer"
+								>
+									<span>👥</span>
+									{league.name}
+								</a>
+							))}
+						</div>
+					</div>
+				)}
 
 				{/* Deadline info */}
 				<div className="mb-4 flex items-center gap-2 text-sm text-gray-400 bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2.5">
