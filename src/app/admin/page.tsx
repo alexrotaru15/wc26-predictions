@@ -2,8 +2,15 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { AdminTabs } from "@/components/admin/AdminTabs";
+import { Suspense } from "react";
 
-export default async function AdminPage() {
+export default async function AdminPage({
+	searchParams,
+}: {
+	searchParams: Promise<{ tab?: string }>;
+}) {
+	const { tab } = await searchParams;
 	const session = await auth();
 
 	if (!session?.user) {
@@ -122,110 +129,181 @@ export default async function AdminPage() {
 
 				{/* Tabs */}
 				<div className="bg-gray-800 rounded-lg shadow">
-					<div className="border-b border-gray-700">
-						<nav className="flex -mb-px">
-							<button className="border-b-2 border-blue-600 text-blue-600 px-6 py-4 font-medium">
-								Past Matches ({pastMatches.length})
-							</button>
-							<button className="border-b-2 border-transparent text-gray-500 hover:text-gray-300 px-6 py-4 font-medium">
-								Upcoming Matches ({upcomingMatches.length})
-							</button>
-						</nav>
-					</div>
+					<Suspense fallback={null}>
+						<AdminTabs
+							pastCount={pastMatches.length}
+							upcomingCount={upcomingMatches.length}
+						/>
+					</Suspense>
 
 					{/* Past Matches Table */}
-					<div className="overflow-x-auto">
-						<table className="w-full">
-							<thead className="bg-gray-900">
-								<tr>
-									<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-										Date
-									</th>
-									<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-										Match
-									</th>
-									<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
-										Score
-									</th>
-									<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
-										Predictions
-									</th>
-									<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
-										Status
-									</th>
-									<th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">
-										Actions
-									</th>
-								</tr>
-							</thead>
-							<tbody className="bg-gray-800 divide-y divide-gray-200">
-								{pastMatches.map((match) => (
-									<tr
-										key={match.id}
-										className="hover:bg-gray-900"
-									>
-										<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-											{new Date(match.scheduledAt).toLocaleDateString("ro-RO", {
-												day: "numeric",
-												month: "short",
-												hour: "2-digit",
-												minute: "2-digit",
-											})}
-										</td>
-										<td className="px-6 py-4 whitespace-nowrap">
-											<div className="flex items-center gap-2">
-												<span>{match.homeTeam.flagUrl}</span>
-												<span className="font-medium">
-													{match.homeTeam.code}
-												</span>
-												<span className="text-gray-400">vs</span>
-												<span className="font-medium">
-													{match.awayTeam.code}
-												</span>
-												<span>{match.awayTeam.flagUrl}</span>
-											</div>
-											{match.group && (
-												<div className="text-xs text-gray-500 mt-1">
-													Group {match.group}
-												</div>
-											)}
-										</td>
-										<td className="px-6 py-4 whitespace-nowrap text-center">
-											{match.isFinished ? (
-												<span className="text-lg font-bold">
-													{match.homeScore} - {match.awayScore}
-												</span>
-											) : (
-												<span className="text-gray-400">-</span>
-											)}
-										</td>
-										<td className="px-6 py-4 whitespace-nowrap text-center text-sm">
-											{match._count.predictions}
-										</td>
-										<td className="px-6 py-4 whitespace-nowrap text-center">
-											{match.isFinished ? (
-												<span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-													Finished
-												</span>
-											) : (
-												<span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-													Pending
-												</span>
-											)}
-										</td>
-										<td className="px-6 py-4 whitespace-nowrap text-right text-sm">
-											<Link
-												href={`/admin/matches/${match.id}/result`}
-												className="text-blue-600 hover:text-blue-900 font-medium"
-											>
-												{match.isFinished ? "Edit Result" : "Add Result"}
-											</Link>
-										</td>
+					{tab !== "upcoming" && (
+						<div className="overflow-x-auto">
+							<table className="w-full">
+								<thead className="bg-gray-900">
+									<tr>
+										<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+											Date
+										</th>
+										<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+											Match
+										</th>
+										<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
+											Score
+										</th>
+										<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
+											Predictions
+										</th>
+										<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
+											Status
+										</th>
+										<th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">
+											Actions
+										</th>
 									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
+								</thead>
+								<tbody className="bg-gray-800 divide-y divide-gray-200">
+									{pastMatches.map((match) => (
+										<tr
+											key={match.id}
+											className="hover:bg-gray-900"
+										>
+											<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+												{new Date(match.scheduledAt).toLocaleDateString(
+													"ro-RO",
+													{
+														day: "numeric",
+														month: "short",
+														hour: "2-digit",
+														minute: "2-digit",
+													},
+												)}
+											</td>
+											<td className="px-6 py-4 whitespace-nowrap">
+												<div className="flex items-center gap-2">
+													<span>{match.homeTeam.flagUrl}</span>
+													<span className="font-medium">
+														{match.homeTeam.code}
+													</span>
+													<span className="text-gray-400">vs</span>
+													<span className="font-medium">
+														{match.awayTeam.code}
+													</span>
+													<span>{match.awayTeam.flagUrl}</span>
+												</div>
+												{match.group && (
+													<div className="text-xs text-gray-500 mt-1">
+														Group {match.group}
+													</div>
+												)}
+											</td>
+											<td className="px-6 py-4 whitespace-nowrap text-center">
+												{match.isFinished ? (
+													<span className="text-lg font-bold">
+														{match.homeScore} - {match.awayScore}
+													</span>
+												) : (
+													<span className="text-gray-400">-</span>
+												)}
+											</td>
+											<td className="px-6 py-4 whitespace-nowrap text-center text-sm">
+												{match._count.predictions}
+											</td>
+											<td className="px-6 py-4 whitespace-nowrap text-center">
+												{match.isFinished ? (
+													<span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+														Finished
+													</span>
+												) : (
+													<span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+														Pending
+													</span>
+												)}
+											</td>
+											<td className="px-6 py-4 whitespace-nowrap text-right text-sm">
+												<Link
+													href={`/admin/matches/${match.id}/result`}
+													className="text-blue-600 hover:text-blue-900 font-medium"
+												>
+													{match.isFinished ? "Edit Result" : "Add Result"}
+												</Link>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					)}
+
+					{/* Upcoming Matches Table */}
+					{tab === "upcoming" && (
+						<div className="overflow-x-auto">
+							<table className="w-full">
+								<thead className="bg-gray-900">
+									<tr>
+										<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+											Date
+										</th>
+										<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+											Match
+										</th>
+										<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
+											Predictions
+										</th>
+										<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
+											Stage
+										</th>
+									</tr>
+								</thead>
+								<tbody className="bg-gray-800 divide-y divide-gray-700">
+									{upcomingMatches.map((match) => (
+										<tr
+											key={match.id}
+											className="hover:bg-gray-900"
+										>
+											<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+												{new Date(match.scheduledAt).toLocaleDateString(
+													"ro-RO",
+													{
+														day: "numeric",
+														month: "short",
+														hour: "2-digit",
+														minute: "2-digit",
+													},
+												)}
+											</td>
+											<td className="px-6 py-4 whitespace-nowrap">
+												<div className="flex items-center gap-2">
+													<span>{match.homeTeam.flagUrl}</span>
+													<span className="font-medium text-gray-100">
+														{match.homeTeam.code}
+													</span>
+													<span className="text-gray-400">vs</span>
+													<span className="font-medium text-gray-100">
+														{match.awayTeam.code}
+													</span>
+													<span>{match.awayTeam.flagUrl}</span>
+												</div>
+												{match.group && (
+													<div className="text-xs text-gray-500 mt-1">
+														Group {match.group}
+													</div>
+												)}
+											</td>
+											<td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-300">
+												{match._count.predictions}
+											</td>
+											<td className="px-6 py-4 whitespace-nowrap text-center">
+												<span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+													{match.stage}
+												</span>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					)}
 				</div>
 			</main>
 		</div>
