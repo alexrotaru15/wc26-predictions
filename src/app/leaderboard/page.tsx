@@ -139,7 +139,7 @@ export default async function LeaderboardPage() {
 							>
 								<button
 									type="submit"
-									className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition"
+									className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer"
 								>
 									Sign Out
 								</button>

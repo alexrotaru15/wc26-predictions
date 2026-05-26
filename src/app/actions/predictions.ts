@@ -28,8 +28,12 @@ export async function submitPrediction({
 			return { success: false, error: "Match not found" };
 		}
 
-		if (new Date() >= match.scheduledAt) {
-			return { success: false, error: "Match has already started" };
+		const deadline = new Date(match.scheduledAt.getTime() - 30 * 60 * 1000);
+		if (new Date() >= deadline) {
+			return {
+				success: false,
+				error: "Predictions are closed 30 minutes before kick-off",
+			};
 		}
 
 		if (match.isFinished) {

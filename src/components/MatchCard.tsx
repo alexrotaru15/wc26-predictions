@@ -35,8 +35,8 @@ export function MatchCard({ match }: { match: Match }) {
 	const [showLeaderboard, setShowLeaderboard] = useState(false);
 
 	const matchDate = new Date(match.scheduledAt);
-	const isPast = matchDate < new Date();
-	const canPredict = !isPast && !match.isFinished;
+	const deadline = new Date(matchDate.getTime() - 30 * 60 * 1000);
+	const canPredict = new Date() < deadline && !match.isFinished;
 	const isGroupStage = match.stage === "GROUP";
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -201,20 +201,20 @@ export function MatchCard({ match }: { match: Match }) {
 				</div>
 
 				{/* Status & Points */}
-				<div className="flex justify-between items-center pt-4 border-t border-gray-100">
+				<div className="flex justify-between items-center pt-4 border-t border-gray-700">
 					<div>
 						{!canPredict && !match.isFinished && (
-							<span className="text-sm text-orange-600 font-medium">
+							<span className="text-sm text-orange-400 font-medium">
 								🔒 Predictions closed
 							</span>
 						)}
 						{match.isFinished && (
-							<span className="text-sm text-green-600 font-medium">
+							<span className="text-sm text-green-400 font-medium">
 								✅ Match finished
 							</span>
 						)}
 						{canPredict && (
-							<span className="text-sm text-blue-600 font-medium">
+							<span className="text-sm text-blue-400 font-medium">
 								⏰ Predictions open
 							</span>
 						)}

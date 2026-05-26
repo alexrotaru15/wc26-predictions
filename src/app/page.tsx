@@ -101,7 +101,7 @@ export default async function Home() {
 							>
 								<button
 									type="submit"
-									className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition"
+									className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer"
 								>
 									Sign Out
 								</button>
@@ -141,6 +141,16 @@ export default async function Home() {
 							Leaderboard
 						</a>
 					</div>
+				</div>
+
+				{/* Deadline info */}
+				<div className="mb-4 flex items-center gap-2 text-sm text-gray-400 bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2.5">
+					<span>ℹ️</span>
+					<span>
+						Predictions close{" "}
+						<span className="text-white font-medium">30 minutes</span> before
+						each match kicks off.
+					</span>
 				</div>
 
 				{/* Matches Grid */}

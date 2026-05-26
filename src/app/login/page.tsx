@@ -27,7 +27,7 @@ export default async function LoginPage() {
 				>
 					<button
 						type="submit"
-						className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2"
+						className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2 cursor-pointer"
 					>
 						<svg
 							className="w-6 h-6"
