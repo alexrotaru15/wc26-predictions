@@ -41,7 +41,11 @@ export function MatchCard({ match }: { match: Match }) {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (!homeScore || !awayScore) return;
+		if (homeScore === "" || awayScore === "") return;
+
+		const parsedHome = parseInt(homeScore);
+		const parsedAway = parseInt(awayScore);
+		if (isNaN(parsedHome) || isNaN(parsedAway)) return;
 
 		setIsSubmitting(true);
 		setMessage("");
@@ -49,8 +53,8 @@ export function MatchCard({ match }: { match: Match }) {
 		try {
 			const result = await submitPrediction({
 				matchId: match.id,
-				homeScore: parseInt(homeScore),
-				awayScore: parseInt(awayScore),
+				homeScore: parsedHome,
+				awayScore: parsedAway,
 			});
 
 			if (result.success) {
@@ -169,7 +173,9 @@ export function MatchCard({ match }: { match: Match }) {
 								/>
 								<button
 									type="submit"
-									disabled={isSubmitting || !homeScore || !awayScore}
+									disabled={
+										isSubmitting || homeScore === "" || awayScore === ""
+									}
 									className="ml-1 sm:ml-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-sm sm:text-base font-medium transition"
 								>
 									{isSubmitting ? "..." : "Save"}
