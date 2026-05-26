@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { getFlagUrl } from "@/lib/flags";
 
 type TeamStanding = {
 	rank: number;
@@ -148,7 +149,11 @@ export function GroupLeaderboard({
 										</td>
 										<td className="px-4 py-3 whitespace-nowrap">
 											<div className="flex items-center gap-2">
-												<span className="text-2xl">{team.teamFlag}</span>
+												<img
+													src={getFlagUrl(team.teamCode)}
+													alt={team.teamCode}
+													className="w-7 h-5 object-cover rounded-sm"
+												/>
 												<div>
 													<div className="text-sm font-medium text-gray-100">
 														{team.teamCode}
@@ -213,9 +218,11 @@ export function GroupLeaderboard({
 													<span className="text-sm font-medium">
 														{match.homeTeam.code}
 													</span>
-													<span className="text-2xl">
-														{match.homeTeam.flagUrl}
-													</span>
+													<img
+														src={getFlagUrl(match.homeTeam.code)}
+														alt={match.homeTeam.code}
+														className="w-7 h-5 object-cover rounded-sm"
+													/>
 												</div>
 
 												{/* Score */}
@@ -232,9 +239,11 @@ export function GroupLeaderboard({
 												</div>
 
 												<div className="flex items-center gap-2 w-24">
-													<span className="text-2xl">
-														{match.awayTeam.flagUrl}
-													</span>
+													<img
+														src={getFlagUrl(match.awayTeam.code)}
+														alt={match.awayTeam.code}
+														className="w-7 h-5 object-cover rounded-sm"
+													/>
 													<span className="text-sm font-medium">
 														{match.awayTeam.code}
 													</span>
