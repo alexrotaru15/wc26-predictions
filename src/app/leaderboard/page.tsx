@@ -16,6 +16,11 @@ export default async function LeaderboardPage() {
 		select: { isAdmin: true },
 	});
 
+	// Get all users
+	const allUsers = await prisma.user.findMany({
+		select: { id: true, name: true, email: true, image: true },
+	});
+
 	// Get all predictions with points
 	const predictions = await prisma.prediction.findMany({
 		where: {
@@ -33,7 +38,7 @@ export default async function LeaderboardPage() {
 		},
 	});
 
-	// Calculate leaderboard
+	// Calculate leaderboard - seed all users with 0 points first
 	const userStats = new Map<
 		string,
 		{
@@ -46,6 +51,18 @@ export default async function LeaderboardPage() {
 			totalPredictions: number;
 		}
 	>();
+
+	for (const u of allUsers) {
+		userStats.set(u.id, {
+			userId: u.id,
+			userName: u.name || u.email || "Unknown",
+			userImage: u.image,
+			points: 0,
+			correctScores: 0,
+			correctOutcomes: 0,
+			totalPredictions: 0,
+		});
+	}
 
 	for (const prediction of predictions) {
 		const userId = prediction.user.id;

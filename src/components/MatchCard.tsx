@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { submitPrediction } from "@/app/actions/predictions";
 import { GroupLeaderboard } from "./GroupLeaderboard";
+import { getFlagUrl } from "@/lib/flags";
 
 type Match = {
 	id: string;
@@ -119,9 +120,11 @@ export function MatchCard({ match }: { match: Match }) {
 				<div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
 					{/* Home Team */}
 					<div className="flex items-center gap-2 sm:gap-3 flex-1 w-full sm:w-auto">
-						<span className="text-2xl sm:text-3xl">
-							{match.homeTeam.flagUrl}
-						</span>
+						<img
+							src={getFlagUrl(match.homeTeam.code)}
+							alt={match.homeTeam.code}
+							className="w-8 h-6 sm:w-10 sm:h-7 object-cover rounded-sm shadow-sm"
+						/>
 						<div className="flex-1 sm:flex-none">
 							<div className="font-semibold text-sm sm:text-base text-gray-100">
 								{match.homeTeam.name}
@@ -189,9 +192,11 @@ export function MatchCard({ match }: { match: Match }) {
 							</div>
 							<div className="text-xs text-gray-500">{match.awayTeam.code}</div>
 						</div>
-						<span className="text-2xl sm:text-3xl">
-							{match.awayTeam.flagUrl}
-						</span>
+						<img
+							src={getFlagUrl(match.awayTeam.code)}
+							alt={match.awayTeam.code}
+							className="w-8 h-6 sm:w-10 sm:h-7 object-cover rounded-sm shadow-sm"
+						/>
 					</div>
 				</div>
 
