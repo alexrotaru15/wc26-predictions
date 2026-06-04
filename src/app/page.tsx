@@ -1,8 +1,8 @@
 import { auth, signOut } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { MatchCard } from "@/components/MatchCard";
 import { PastMatches } from "@/components/PastMatches";
+import { DashboardTabs } from "@/components/DashboardTabs";
 
 export default async function Home() {
 	const session = await auth();
@@ -77,6 +77,17 @@ export default async function Home() {
 		include: { league: { select: { id: true, name: true } } },
 		take: 3,
 		orderBy: { joinedAt: "asc" },
+	});
+
+	// Fetch all teams for group standings
+	const teams = await prisma.team.findMany({
+		select: {
+			id: true,
+			name: true,
+			code: true,
+			flagUrl: true,
+			group: true,
+		},
 	});
 
 	return (
@@ -182,22 +193,11 @@ export default async function Home() {
 					</span>
 				</div>
 
-				{/* Matches Grid */}
-				{matchesWithPredictions.length > 0 ? (
-					<div className="grid grid-cols-1 gap-4">
-						{matchesWithPredictions.map((match) => (
-							<MatchCard
-								key={match.id}
-								match={match}
-							/>
-						))}
-					</div>
-				) : (
-					<div className="bg-gray-800 rounded-lg shadow p-12 text-center border border-gray-700">
-						<div className="text-4xl mb-4">⚽</div>
-						<p className="text-gray-400">No upcoming matches at the moment</p>
-					</div>
-				)}
+				{/* Dashboard Tabs */}
+				<DashboardTabs
+					matches={matchesWithPredictions}
+					teams={teams}
+				/>
 			</main>
 		</div>
 	);

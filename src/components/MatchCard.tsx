@@ -176,7 +176,7 @@ export function MatchCard({ match }: { match: Match }) {
 									disabled={
 										isSubmitting || homeScore === "" || awayScore === ""
 									}
-									className="ml-1 sm:ml-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-sm sm:text-base font-medium transition"
+									className="ml-1 sm:ml-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-sm sm:text-base font-medium transition cursor-pointer"
 								>
 									{isSubmitting ? "..." : "Save"}
 								</button>
