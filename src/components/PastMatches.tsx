@@ -43,15 +43,17 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 				<div className="flex items-center gap-3">
 					<span className="text-xl">{isExpanded ? "▼" : "▶"}</span>
 					<div className="text-left">
-						<h2 className="text-xl font-bold text-gray-100">Past Results</h2>
+						<h2 className="text-xl font-bold text-gray-100">
+							Rezultate Anterioare
+						</h2>
 						<p className="text-sm text-gray-400">
-							{matches.length} finished{" "}
-							{matches.length === 1 ? "match" : "matches"}
+							{matches.length} finalizate{" "}
+							{matches.length === 1 ? "meci" : "meciuri"}
 						</p>
 					</div>
 				</div>
 				<div className="text-sm text-gray-500">
-					{isExpanded ? "Click to collapse" : "Click to expand"}
+					{isExpanded ? "Click pentru a restrânge" : "Click pentru a extinde"}
 				</div>
 			</button>
 
@@ -76,7 +78,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 									<div className="flex items-center gap-2">
 										{isGroupStage && match.group && (
 											<span className="text-sm font-medium text-gray-500">
-												Group {match.group}
+												Grupa {match.group}
 											</span>
 										)}
 										{!isGroupStage && (
@@ -146,7 +148,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 										<div className="flex items-center justify-between">
 											<div className="flex items-center gap-4">
 												<div className="text-sm text-gray-400">
-													Your prediction:
+													Predicția ta:
 												</div>
 												<div className="text-lg font-bold">
 													{match.userPrediction!.homeScore} -{" "}
@@ -158,7 +160,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 													<>
 														<span className="text-2xl">🎯</span>
 														<span className="text-green-700 font-bold">
-															+3 points (Exact!)
+															+3 puncte (Exact!)
 														</span>
 													</>
 												)}
@@ -166,7 +168,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 													<>
 														<span className="text-2xl">✓</span>
 														<span className="text-blue-700 font-bold">
-															+1 point (Correct outcome)
+															+1 punct (Rezultat corect)
 														</span>
 													</>
 												)}
@@ -174,7 +176,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 													<>
 														<span className="text-2xl">❌</span>
 														<span className="text-gray-400 font-medium">
-															0 points
+															0 puncte
 														</span>
 													</>
 												)}
@@ -184,7 +186,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 								) : (
 									<div className="p-4 rounded-lg bg-yellow-50 border border-yellow-200">
 										<div className="text-sm text-yellow-800 text-center">
-											⚠️ You didn't make a prediction for this match
+											⚠️ Nu ai făcut o predicție pentru acest meci
 										</div>
 									</div>
 								)}

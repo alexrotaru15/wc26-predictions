@@ -32,12 +32,12 @@ export function CopyInviteLink({
 			{copied ? (
 				<>
 					<span>✓</span>
-					<span>Copied!</span>
+					<span>Copiat!</span>
 				</>
 			) : (
 				<>
 					<span>🔗</span>
-					<span>Copy Link</span>
+					<span>Copiază Link</span>
 				</>
 			)}
 		</button>

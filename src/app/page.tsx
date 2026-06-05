@@ -96,9 +96,7 @@ export default async function Home() {
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex justify-between items-center h-16">
 						<div className="flex items-center">
-							<h1 className="text-2xl font-bold text-gray-100">
-								⚽ World Cup 2026
-							</h1>
+							<h1 className="text-2xl font-bold text-gray-100">⚽ WC 2026</h1>
 						</div>
 						<div className="flex items-center gap-4">
 							<span className="text-sm text-gray-300">
@@ -122,7 +120,7 @@ export default async function Home() {
 									type="submit"
 									className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer"
 								>
-									Sign Out
+									Deconectare
 								</button>
 							</form>
 						</div>
@@ -138,10 +136,10 @@ export default async function Home() {
 				<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
 					<div>
 						<h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-2">
-							Upcoming Matches
+							Meciuri Viitoare
 						</h2>
 						<p className="text-sm sm:text-base text-gray-400">
-							Make your predictions before the matches start!
+							Fă-ți predicțiile înainte să înceapă meciurile!
 						</p>
 					</div>
 					<div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
@@ -150,14 +148,14 @@ export default async function Home() {
 							className="flex-1 sm:flex-none bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-bold shadow-lg transition flex items-center justify-center gap-2 text-sm sm:text-base"
 						>
 							<span className="text-lg sm:text-xl">👥</span>
-							Leagues
+							Ligi
 						</a>
 						<a
 							href="/leaderboard"
 							className="flex-1 sm:flex-none bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-bold shadow-lg transition flex items-center justify-center gap-2 text-sm sm:text-base"
 						>
 							<span className="text-lg sm:text-xl">🏆</span>
-							Leaderboard
+							Clasament
 						</a>
 					</div>
 				</div>
@@ -166,7 +164,7 @@ export default async function Home() {
 				{userLeagues.length > 0 && (
 					<div className="mb-6">
 						<h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">
-							My Leagues
+							Ligiile Mele
 						</h3>
 						<div className="flex flex-wrap gap-2">
 							{userLeagues.map(({ league }) => (
@@ -187,9 +185,9 @@ export default async function Home() {
 				<div className="mb-4 flex items-center gap-2 text-sm text-gray-400 bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2.5">
 					<span>ℹ️</span>
 					<span>
-						Predictions close{" "}
-						<span className="text-white font-medium">30 minutes</span> before
-						each match kicks off.
+						Predicțiile se închid{" "}
+						<span className="text-white font-medium">30 de minute</span> înainte
+						de fiecare meci.
 					</span>
 				</div>
 

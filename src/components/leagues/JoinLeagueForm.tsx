@@ -12,7 +12,7 @@ export function JoinLeagueForm({ userId }: { userId: string }) {
 		e.preventDefault();
 
 		if (!inviteCode.trim()) {
-			setMessage("❌ Please enter an invite code");
+			setMessage("❌ Te rugăm să introduci un cod de invitație");
 			return;
 		}
 
@@ -26,7 +26,7 @@ export function JoinLeagueForm({ userId }: { userId: string }) {
 			});
 
 			if (result.success) {
-				setMessage(`✅ Joined league: ${result.leagueName}`);
+				setMessage(`✅ Te-ai alăturat ligi: ${result.leagueName}`);
 				setInviteCode("");
 				setTimeout(() => {
 					window.location.href = "/leagues";
@@ -35,7 +35,7 @@ export function JoinLeagueForm({ userId }: { userId: string }) {
 				setMessage(`❌ ${result.error}`);
 			}
 		} catch (error) {
-			setMessage("❌ Failed to join league");
+			setMessage("❌ Nu s-a putut alătura la ligă");
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -48,19 +48,21 @@ export function JoinLeagueForm({ userId }: { userId: string }) {
 		>
 			<div>
 				<label className="block text-sm font-medium text-gray-300 mb-1">
-					Invite Code
+					Cod Invitație
 				</label>
 				<input
 					type="text"
 					value={inviteCode}
 					onChange={(e) => setInviteCode(e.target.value.toUpperCase())}
-					placeholder="e.g., ABC123"
+					placeholder="ex., ABC123"
 					className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 font-mono uppercase"
 					disabled={isSubmitting}
 					maxLength={6}
 					required
 				/>
-				<p className="text-xs text-gray-500 mt-1">Enter the 6-character code</p>
+				<p className="text-xs text-gray-500 mt-1">
+					Introdu codul de 6 caractere
+				</p>
 			</div>
 
 			{message && (
@@ -80,7 +82,7 @@ export function JoinLeagueForm({ userId }: { userId: string }) {
 				disabled={isSubmitting || !inviteCode.trim()}
 				className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-300 text-white px-4 py-2 rounded-lg font-medium transition"
 			>
-				{isSubmitting ? "Joining..." : "Join League"}
+				{isSubmitting ? "Se alătură..." : "Alătură-te Ligi"}
 			</button>
 		</form>
 	);

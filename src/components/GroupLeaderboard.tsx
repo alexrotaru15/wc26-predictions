@@ -85,7 +85,7 @@ export function GroupLeaderboard({
 			>
 				{/* Header */}
 				<div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-4 flex justify-between items-center">
-					<h3 className="text-xl font-bold">Group {group} Standings</h3>
+					<h3 className="text-xl font-bold">Clasament Grupa {group}</h3>
 					<button
 						onClick={onClose}
 						className="text-white hover:text-gray-700 text-2xl font-bold"
@@ -98,14 +98,14 @@ export function GroupLeaderboard({
 				<div className="overflow-y-auto max-h-[calc(80vh-80px)]">
 					{loading ? (
 						<div className="p-12 text-center text-gray-500">
-							Loading standings...
+							Se încarcă clasamentul...
 						</div>
 					) : standings.length > 0 ? (
 						<table className="w-full">
 							<thead className="bg-gray-900 sticky top-0">
 								<tr>
 									<th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-										Pos
+										Loc
 									</th>
 									<th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
 										Team
@@ -194,7 +194,7 @@ export function GroupLeaderboard({
 						</table>
 					) : (
 						<div className="p-12 text-center text-gray-500">
-							No matches played yet in this group
+							Nu s-au jucat încă meciuri în această grupă
 						</div>
 					)}
 
@@ -202,7 +202,7 @@ export function GroupLeaderboard({
 					{matches.length > 0 && (
 						<div className="border-t border-gray-700 p-6">
 							<h4 className="text-lg font-bold text-gray-100 mb-4">
-								Group Matches
+								Meciurile Grupei
 							</h4>
 							<div className="space-y-3">
 								{matches.map((match) => {

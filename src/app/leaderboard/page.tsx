@@ -116,7 +116,7 @@ export default async function LeaderboardPage() {
 								href="/"
 								className="text-2xl font-bold text-gray-100 hover:text-gray-300"
 							>
-								⚽ World Cup 2026
+								⚽ WC 2026
 							</Link>
 						</div>
 						<div className="flex items-center gap-4">
@@ -141,7 +141,7 @@ export default async function LeaderboardPage() {
 									type="submit"
 									className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer"
 								>
-									Sign Out
+									Deconectare
 								</button>
 							</form>
 						</div>
@@ -156,41 +156,49 @@ export default async function LeaderboardPage() {
 						href="/"
 						className="text-blue-600 hover:text-blue-700 font-medium text-sm mb-4 inline-block"
 					>
-						← Back to Dashboard
+						← Înapoi la Dashboard
 					</Link>
 					<h1 className="text-3xl font-bold text-gray-100 mb-2">
-						🏆 Global Leaderboard
+						🏆 Clasament Global
 					</h1>
 					<p className="text-gray-400">
-						See how you rank against all players worldwide
+						Vezi cum te clasezi în comparație cu toți jucătorii din lume
 					</p>
 				</div>
 
 				{/* Current User Stats */}
 				{currentUserRank && (
-					<div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg shadow-lg p-6 mb-8">
-						<div className="flex items-center justify-between">
-							<div>
-								<div className="text-sm opacity-90 mb-1">Your Rank</div>
-								<div className="text-4xl font-bold">
+					<div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg shadow-lg p-4 sm:p-6 mb-8">
+						<div className="grid grid-cols-2 sm:flex sm:items-center sm:justify-between gap-4 sm:gap-6">
+							<div className="text-center sm:text-left">
+								<div className="text-xs sm:text-sm opacity-90 mb-1">
+									Locul Tău
+								</div>
+								<div className="text-2xl sm:text-4xl font-bold">
 									#{currentUserRank.rank}
 								</div>
 							</div>
-							<div className="text-right">
-								<div className="text-sm opacity-90 mb-1">Total Points</div>
-								<div className="text-4xl font-bold">
+							<div className="text-center sm:text-right">
+								<div className="text-xs sm:text-sm opacity-90 mb-1">
+									Puncte Totale
+								</div>
+								<div className="text-2xl sm:text-4xl font-bold">
 									{currentUserRank.points}
 								</div>
 							</div>
-							<div className="text-right">
-								<div className="text-sm opacity-90 mb-1">Exact Scores</div>
-								<div className="text-2xl font-bold">
+							<div className="text-center sm:text-right">
+								<div className="text-xs sm:text-sm opacity-90 mb-1">
+									Scoruri Exacte
+								</div>
+								<div className="text-xl sm:text-2xl font-bold">
 									{currentUserRank.correctScores}
 								</div>
 							</div>
-							<div className="text-right">
-								<div className="text-sm opacity-90 mb-1">Correct Outcomes</div>
-								<div className="text-2xl font-bold">
+							<div className="text-center sm:text-right">
+								<div className="text-xs sm:text-sm opacity-90 mb-1">
+									Rezultate Corecte
+								</div>
+								<div className="text-xl sm:text-2xl font-bold">
 									{currentUserRank.correctOutcomes}
 								</div>
 							</div>
@@ -204,23 +212,23 @@ export default async function LeaderboardPage() {
 						<table className="w-full">
 							<thead className="bg-gray-900">
 								<tr>
-									<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-										Rank
+									<th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+										Loc
 									</th>
-									<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-										Player
+									<th className="px-2 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+										Jucător
 									</th>
-									<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-										Points
+									<th className="px-2 sm:px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+										Puncte
 									</th>
-									<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-										Exact Scores
+									<th className="hidden md:table-cell px-2 sm:px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+										Scoruri Exacte
 									</th>
-									<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-										Correct Outcomes
+									<th className="hidden lg:table-cell px-2 sm:px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+										Rezultate Corecte
 									</th>
-									<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-										Predictions
+									<th className="hidden lg:table-cell px-2 sm:px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+										Predicții
 									</th>
 								</tr>
 							</thead>
@@ -236,10 +244,10 @@ export default async function LeaderboardPage() {
 													: "hover:bg-gray-900"
 											} transition`}
 										>
-											<td className="px-6 py-4 whitespace-nowrap">
+											<td className="px-2 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
 												<div className="flex items-center">
 													{entry.rank <= 3 ? (
-														<span className="text-3xl">
+														<span className="text-2xl sm:text-3xl">
 															{entry.rank === 1
 																? "🥇"
 																: entry.rank === 2
@@ -247,45 +255,45 @@ export default async function LeaderboardPage() {
 																	: "🥉"}
 														</span>
 													) : (
-														<span className="text-gray-500 font-medium text-lg">
+														<span className="text-gray-500 font-medium text-sm sm:text-lg">
 															#{entry.rank}
 														</span>
 													)}
 												</div>
 											</td>
-											<td className="px-6 py-4 whitespace-nowrap">
-												<div className="flex items-center gap-3">
+											<td className="px-2 sm:px-6 py-3 sm:py-4">
+												<div className="flex items-center gap-2 sm:gap-3">
 													{entry.userImage && (
 														<img
 															src={entry.userImage}
 															alt={entry.userName}
-															className="w-8 h-8 rounded-full"
+															className="w-6 h-6 sm:w-8 sm:h-8 rounded-full flex-shrink-0"
 														/>
 													)}
-													<div>
-														<div className="text-sm font-medium text-gray-100">
+													<div className="min-w-0">
+														<div className="text-xs sm:text-sm font-medium text-gray-100 truncate">
 															{entry.userName}
 															{isCurrentUser && (
-																<span className="ml-2 text-xs bg-blue-500/20 text-blue-300 border border-blue-500/50 px-2 py-1 rounded-full font-semibold">
-																	You
+																<span className="ml-1 sm:ml-2 text-xs bg-blue-500/20 text-blue-300 border border-blue-500/50 px-1 sm:px-2 py-0.5 sm:py-1 rounded-full font-semibold">
+																	Tu
 																</span>
 															)}
 														</div>
 													</div>
 												</div>
 											</td>
-											<td className="px-6 py-4 whitespace-nowrap text-center">
-												<span className="text-2xl font-bold text-blue-600">
+											<td className="px-2 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-center">
+												<span className="text-lg sm:text-2xl font-bold text-blue-600">
 													{entry.points}
 												</span>
 											</td>
-											<td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-100 font-medium">
+											<td className="hidden md:table-cell px-2 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-center text-sm text-gray-100 font-medium">
 												{entry.correctScores}
 											</td>
-											<td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-100 font-medium">
+											<td className="hidden lg:table-cell px-2 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-center text-sm text-gray-100 font-medium">
 												{entry.correctOutcomes}
 											</td>
-											<td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+											<td className="hidden lg:table-cell px-2 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-center text-sm text-gray-500">
 												{entry.totalPredictions}
 											</td>
 										</tr>
@@ -296,10 +304,10 @@ export default async function LeaderboardPage() {
 					) : (
 						<div className="p-12 text-center text-gray-500">
 							<div className="text-4xl mb-4">📊</div>
-							<p className="text-lg">No predictions scored yet</p>
+							<p className="text-lg">Nicio predicție punctată încă</p>
 							<p className="text-sm mt-2">
-								The leaderboard will appear once matches are finished and
-								predictions are scored
+								Clasamentul va apărea odată ce meciurile sunt finalizate și
+								predicțiile sunt punctate
 							</p>
 						</div>
 					)}

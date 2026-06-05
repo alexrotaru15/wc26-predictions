@@ -60,7 +60,7 @@ export function DashboardTabs({ matches, teams }: Props) {
 							: "text-gray-400 hover:text-gray-300"
 					}`}
 				>
-					All Matches
+					Toate Meciurile
 				</button>
 				<button
 					onClick={() => setActiveTab("groups")}
@@ -70,7 +70,7 @@ export function DashboardTabs({ matches, teams }: Props) {
 							: "text-gray-400 hover:text-gray-300"
 					}`}
 				>
-					Groups & Standings
+					Grupe & Clasamente
 				</button>
 			</div>
 
@@ -89,7 +89,7 @@ export function DashboardTabs({ matches, teams }: Props) {
 					) : (
 						<div className="bg-gray-800 rounded-lg shadow p-12 text-center border border-gray-700">
 							<div className="text-4xl mb-4">⚽</div>
-							<p className="text-gray-400">No upcoming matches at the moment</p>
+							<p className="text-gray-400">Nicio meci viitor momentan</p>
 						</div>
 					)}
 				</div>

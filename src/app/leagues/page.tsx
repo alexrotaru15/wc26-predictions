@@ -49,7 +49,7 @@ export default async function LeaguesPage() {
 								href="/"
 								className="text-2xl font-bold text-gray-100 hover:text-gray-300"
 							>
-								⚽ World Cup 2026
+								⚽ WC 2026
 							</Link>
 						</div>
 						<div className="flex items-center gap-4">
@@ -74,7 +74,7 @@ export default async function LeaguesPage() {
 									type="submit"
 									className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer"
 								>
-									Sign Out
+									Deconectare
 								</button>
 							</form>
 						</div>
@@ -89,13 +89,13 @@ export default async function LeaguesPage() {
 						href="/"
 						className="text-blue-600 hover:text-blue-700 font-medium text-sm mb-4 inline-block"
 					>
-						← Back to Dashboard
+						← Înapoi la Dashboard
 					</Link>
 					<h1 className="text-3xl font-bold text-gray-100 mb-2">
-						🏆 My Leagues
+						🏆 Ligiile Mele
 					</h1>
 					<p className="text-gray-400">
-						Create private leagues and compete with friends
+						Creează ligi private și concurează cu prietenii
 					</p>
 				</div>
 
@@ -103,7 +103,7 @@ export default async function LeaguesPage() {
 					{/* Left Column - My Leagues */}
 					<div className="lg:col-span-2">
 						<h2 className="text-xl font-bold text-gray-100 mb-4">
-							Your Leagues ({userLeagues.length})
+							Ligiile Tale ({userLeagues.length})
 						</h2>
 
 						{userLeagues.length > 0 ? (
@@ -119,10 +119,11 @@ export default async function LeaguesPage() {
 							<div className="bg-gray-800 rounded-lg shadow p-12 text-center">
 								<div className="text-4xl mb-4">🏆</div>
 								<p className="text-gray-500 mb-4">
-									You haven't joined any leagues yet
+									Nu te-ai alăturat încă nicioi ligi
 								</p>
 								<p className="text-sm text-gray-400">
-									Create a new league or join one using an invite code
+									Creează o ligă nouă sau alătură-te uneia folosind un cod de
+									invitație
 								</p>
 							</div>
 						)}
@@ -130,18 +131,18 @@ export default async function LeaguesPage() {
 
 					{/* Right Column - Create & Join */}
 					<div className="space-y-6">
-						{/* Create League */}
+						{/* Creează Ligă */}
 						<div className="bg-gray-800 rounded-lg shadow p-6">
 							<h3 className="text-lg font-bold text-gray-100 mb-4">
-								Create League
+								Creează Ligă
 							</h3>
 							<CreateLeagueForm userId={session.user.id} />
 						</div>
 
-						{/* Join League */}
+						{/* Alătură-te Ligi */}
 						<div className="bg-gray-800 rounded-lg shadow p-6">
 							<h3 className="text-lg font-bold text-gray-100 mb-4">
-								Join League
+								Alătură-te Ligi
 							</h3>
 							<JoinLeagueForm userId={session.user.id} />
 						</div>

@@ -40,11 +40,9 @@ export function ThirdPlaceStandings({ thirdPlaceTeams }: Props) {
 	return (
 		<div className="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
 			<div className="bg-gray-750 px-4 py-3 border-b border-gray-700">
-				<h3 className="text-lg font-bold text-gray-100">
-					Third Place Rankings
-				</h3>
+				<h3 className="text-lg font-bold text-gray-100">Clasament Locuri 3</h3>
 				<p className="text-xs text-gray-400 mt-1">
-					Top 8 teams qualify for Round of 32
+					Primele 8 echipe se califică în 16-imile de finală
 				</p>
 			</div>
 			<div className="overflow-x-auto">
@@ -52,16 +50,16 @@ export function ThirdPlaceStandings({ thirdPlaceTeams }: Props) {
 					<thead className="bg-gray-750/50 text-xs text-gray-400 uppercase">
 						<tr>
 							<th className="px-4 py-2 text-left">#</th>
-							<th className="px-4 py-2 text-left">Team</th>
-							<th className="px-2 py-2 text-center">Group</th>
+							<th className="px-4 py-2 text-left">Echipă</th>
+							<th className="px-2 py-2 text-center">Grup</th>
 							<th className="px-2 py-2 text-center">P</th>
-							<th className="px-2 py-2 text-center">W</th>
+							<th className="px-2 py-2 text-center">V</th>
 							<th className="px-2 py-2 text-center">D</th>
-							<th className="px-2 py-2 text-center">L</th>
-							<th className="px-2 py-2 text-center">GF</th>
-							<th className="px-2 py-2 text-center">GA</th>
+							<th className="px-2 py-2 text-center">Î</th>
+							<th className="px-2 py-2 text-center">GM</th>
+							<th className="px-2 py-2 text-center">GP</th>
 							<th className="px-2 py-2 text-center">GD</th>
-							<th className="px-2 py-2 text-center font-bold">Pts</th>
+							<th className="px-2 py-2 text-center font-bold">Pct</th>
 						</tr>
 					</thead>
 					<tbody className="divide-y divide-gray-700">

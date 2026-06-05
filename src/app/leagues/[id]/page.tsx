@@ -137,7 +137,7 @@ export default async function LeagueLeaderboardPage({
 								href="/"
 								className="text-2xl font-bold text-gray-100 hover:text-gray-300"
 							>
-								⚽ World Cup 2026
+								⚽ WC 2026
 							</Link>
 						</div>
 						<div className="flex items-center gap-4">
@@ -162,7 +162,7 @@ export default async function LeagueLeaderboardPage({
 									type="submit"
 									className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer"
 								>
-									Sign Out
+									Deconectare
 								</button>
 							</form>
 						</div>
@@ -177,7 +177,7 @@ export default async function LeagueLeaderboardPage({
 						href="/leagues"
 						className="text-blue-600 hover:text-blue-700 font-medium text-sm mb-4 inline-block"
 					>
-						← Back to Leagues
+						← Înapoi la Ligi
 					</Link>
 					<div className="flex justify-between items-start">
 						<div>
@@ -185,12 +185,12 @@ export default async function LeagueLeaderboardPage({
 								{league.name}
 							</h1>
 							<p className="text-gray-400">
-								Created by {league.createdBy.name || league.createdBy.email} •{" "}
-								{league.members.length} members
+								{/* Creat de {league.createdBy.name || league.createdBy.email} •{" "} */}
+								{league.members.length} membri
 							</p>
 						</div>
 						<div className="text-right">
-							<div className="text-sm text-gray-500 mb-2">Invite Code</div>
+							<div className="text-sm text-gray-500 mb-2">Cod Invitație</div>
 							<div className="font-mono text-2xl font-bold bg-gray-800 px-4 py-2 rounded-lg mb-3">
 								{league.inviteCode}
 							</div>
@@ -204,25 +204,25 @@ export default async function LeagueLeaderboardPage({
 					<div className="bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg shadow-lg p-6 mb-8">
 						<div className="flex items-center justify-between">
 							<div>
-								<div className="text-sm opacity-90 mb-1">Your Rank</div>
+								<div className="text-sm opacity-90 mb-1">Locul Tău</div>
 								<div className="text-4xl font-bold">
 									#{currentUserRank.rank}
 								</div>
 							</div>
 							<div className="text-right">
-								<div className="text-sm opacity-90 mb-1">Total Points</div>
+								<div className="text-sm opacity-90 mb-1">Puncte Totale</div>
 								<div className="text-4xl font-bold">
 									{currentUserRank.points}
 								</div>
 							</div>
 							<div className="text-right">
-								<div className="text-sm opacity-90 mb-1">Exact Scores</div>
+								<div className="text-sm opacity-90 mb-1">Scoruri Exacte</div>
 								<div className="text-2xl font-bold">
 									{currentUserRank.correctScores}
 								</div>
 							</div>
 							<div className="text-right">
-								<div className="text-sm opacity-90 mb-1">Correct Outcomes</div>
+								<div className="text-sm opacity-90 mb-1">Rezultate Corecte</div>
 								<div className="text-2xl font-bold">
 									{currentUserRank.correctOutcomes}
 								</div>
@@ -237,22 +237,22 @@ export default async function LeagueLeaderboardPage({
 						<thead className="bg-gray-900">
 							<tr>
 								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Rank
+									Loc
 								</th>
 								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Player
+									Jucător
 								</th>
 								<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Points
+									Puncte
 								</th>
 								<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Exact Scores
+									Scoruri Exacte
 								</th>
 								<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Correct Outcomes
+									Rezultate Corecte
 								</th>
 								<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-									Predictions
+									Predicții
 								</th>
 							</tr>
 						</thead>
@@ -299,7 +299,7 @@ export default async function LeagueLeaderboardPage({
 														{entry.userName}
 														{isCurrentUser && (
 															<span className="ml-2 text-xs bg-purple-500/20 text-purple-300 border border-purple-500/50 px-2 py-1 rounded-full font-semibold">
-																You
+																Tu
 															</span>
 														)}
 													</div>

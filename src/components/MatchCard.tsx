@@ -58,13 +58,13 @@ export function MatchCard({ match }: { match: Match }) {
 			});
 
 			if (result.success) {
-				setMessage("✅ Prediction saved!");
+				setMessage("✅ Predicție salvată!");
 				setTimeout(() => setMessage(""), 3000);
 			} else {
 				setMessage(`❌ ${result.error}`);
 			}
 		} catch (error) {
-			setMessage("❌ Failed to save prediction");
+			setMessage("❌ Nu s-a putut salva predicția");
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -87,12 +87,12 @@ export function MatchCard({ match }: { match: Match }) {
 						{isGroupStage && match.group && (
 							<>
 								<span className="text-sm font-medium text-gray-500">
-									Group {match.group}
+									Grupa {match.group}
 								</span>
 								<button
 									onClick={() => setShowLeaderboard(true)}
 									className="text-blue-600 hover:text-blue-700 transition"
-									title="View group leaderboard"
+									title="Vezi clasamentul grupei"
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +178,7 @@ export function MatchCard({ match }: { match: Match }) {
 									}
 									className="ml-1 sm:ml-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-sm sm:text-base font-medium transition cursor-pointer"
 								>
-									{isSubmitting ? "..." : "Save"}
+									{isSubmitting ? "..." : "Salvează"}
 								</button>
 							</form>
 						) : (
@@ -211,17 +211,17 @@ export function MatchCard({ match }: { match: Match }) {
 					<div>
 						{!canPredict && !match.isFinished && (
 							<span className="text-sm text-orange-400 font-medium">
-								🔒 Predictions closed
+								🔒 Predicțiile s-au închis
 							</span>
 						)}
 						{match.isFinished && (
 							<span className="text-sm text-green-400 font-medium">
-								✅ Match finished
+								✅ Meci terminat
 							</span>
 						)}
 						{canPredict && (
 							<span className="text-sm text-blue-400 font-medium">
-								⏰ Predictions open
+								⏰ Predicții deschise
 							</span>
 						)}
 					</div>
@@ -229,7 +229,7 @@ export function MatchCard({ match }: { match: Match }) {
 						{match.userPrediction?.points !== null &&
 							match.userPrediction?.points !== undefined && (
 								<span className="text-sm font-bold text-green-600">
-									+{match.userPrediction.points} points
+									+{match.userPrediction.points} puncte
 								</span>
 							)}
 					</div>

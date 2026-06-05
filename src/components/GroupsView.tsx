@@ -269,7 +269,7 @@ export function GroupsView({ matches, teams }: Props) {
 								: "text-gray-400 hover:text-gray-300 hover:bg-gray-800"
 						}`}
 					>
-						Group {group}
+						Grupa {group}
 					</button>
 				))}
 			</div>
@@ -289,7 +289,7 @@ export function GroupsView({ matches, teams }: Props) {
 					{groupMatches.length > 0 && (
 						<div className="space-y-3">
 							<h4 className="text-sm font-medium text-gray-400 uppercase tracking-wider px-1">
-								Group {activeGroup} Matches
+								Meciurile Grupei {activeGroup}
 							</h4>
 							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
 								{groupMatches.map((match) => (

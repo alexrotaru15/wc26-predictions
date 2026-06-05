@@ -12,7 +12,7 @@ export function CreateLeagueForm({ userId }: { userId: string }) {
 		e.preventDefault();
 
 		if (!name.trim()) {
-			setMessage("❌ Please enter a league name");
+			setMessage("❌ Te rugăm să introduci un nume pentru ligă");
 			return;
 		}
 
@@ -26,7 +26,7 @@ export function CreateLeagueForm({ userId }: { userId: string }) {
 			});
 
 			if (result.success) {
-				setMessage(`✅ League created! Invite code: ${result.inviteCode}`);
+				setMessage(`✅ Ligă creată! Cod invitație: ${result.inviteCode}`);
 				setName("");
 				setTimeout(() => {
 					window.location.href = "/leagues";
@@ -35,7 +35,7 @@ export function CreateLeagueForm({ userId }: { userId: string }) {
 				setMessage(`❌ ${result.error}`);
 			}
 		} catch (error) {
-			setMessage("❌ Failed to create league");
+			setMessage("❌ Nu s-a putut crea liga");
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -48,13 +48,13 @@ export function CreateLeagueForm({ userId }: { userId: string }) {
 		>
 			<div>
 				<label className="block text-sm font-medium text-gray-300 mb-1">
-					League Name *
+					Nume Ligă *
 				</label>
 				<input
 					type="text"
 					value={name}
 					onChange={(e) => setName(e.target.value)}
-					placeholder="e.g., Friends League"
+					placeholder="ex., Liga Prietenilor"
 					className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					disabled={isSubmitting}
 					maxLength={50}
@@ -79,7 +79,7 @@ export function CreateLeagueForm({ userId }: { userId: string }) {
 				disabled={isSubmitting || !name.trim()}
 				className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-4 py-2 rounded-lg font-medium transition"
 			>
-				{isSubmitting ? "Creating..." : "Create League"}
+				{isSubmitting ? "Se creează..." : "Creează Ligă"}
 			</button>
 		</form>
 	);
