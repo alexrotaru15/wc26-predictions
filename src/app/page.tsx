@@ -189,9 +189,16 @@ export default async function Home() {
 					</span>
 				</div>
 
-				{/* Dashboard Tabs */}
+				{/* Dashboard Tabs - gets all matches for groups view */}
 				<DashboardTabs
-					matches={matchesWithPredictions}
+					matches={[
+						...matchesWithPredictions,
+						...pastMatchesWithPredictions,
+					].sort(
+						(a, b) =>
+							new Date(a.scheduledAt).getTime() -
+							new Date(b.scheduledAt).getTime(),
+					)}
 					teams={teams}
 				/>
 			</main>

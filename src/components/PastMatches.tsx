@@ -43,7 +43,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 				<div className="flex items-center gap-3">
 					<span className="text-xl">{isExpanded ? "▼" : "▶"}</span>
 					<div className="text-left">
-						<h2 className="text-xl font-bold text-gray-100">
+						<h2 className="text-lg font-bold text-gray-100">
 							Rezultate Anterioare
 						</h2>
 						<p className="text-sm text-gray-400">
@@ -103,7 +103,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 									<div className="flex items-center gap-3 flex-1">
 										<span className="text-3xl">{match.homeTeam.flagUrl}</span>
 										<div>
-											<div className="font-semibold text-gray-100">
+											<div className="font-medium text-gray-100 text-sm">
 												{match.homeTeam.name}
 											</div>
 											<div className="text-sm text-gray-500">
@@ -114,7 +114,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 
 									{/* Final Score */}
 									<div className="text-center px-8">
-										<div className="text-3xl font-bold text-gray-100">
+										<div className="text-2xl font-bold text-gray-100">
 											{match.homeScore} - {match.awayScore}
 										</div>
 										<div className="text-xs text-gray-500 mt-1">FT</div>
@@ -123,7 +123,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 									{/* Away Team */}
 									<div className="flex items-center gap-3 flex-1 justify-end">
 										<div className="text-right">
-											<div className="font-semibold text-gray-100">
+											<div className="font-medium text-gray-100 text-sm">
 												{match.awayTeam.name}
 											</div>
 											<div className="text-sm text-gray-500">
@@ -137,12 +137,12 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 								{/* User Prediction */}
 								{userPredicted ? (
 									<div
-										className={`p-4 rounded-lg ${
+										className={`p-3 rounded-lg ${
 											isCorrectScore
-												? "bg-green-50 border border-green-200"
+												? "bg-green-900/30 border border-green-700"
 												: isCorrectOutcome
-													? "bg-blue-50 border border-blue-200"
-													: "bg-gray-900 border border-gray-700"
+													? "bg-blue-900/30 border border-blue-700"
+													: "bg-gray-700/50 border border-gray-600"
 										}`}
 									>
 										<div className="flex items-center justify-between">
@@ -158,23 +158,23 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 											<div className="flex items-center gap-2">
 												{isCorrectScore && (
 													<>
-														<span className="text-2xl">🎯</span>
-														<span className="text-green-700 font-bold">
-															+3 puncte (Exact!)
+														<span >🎯</span>
+														<span className="text-green-400 font-bold">
+															+3 puncte
 														</span>
 													</>
 												)}
 												{isCorrectOutcome && (
 													<>
-														<span className="text-2xl">✓</span>
-														<span className="text-blue-700 font-bold">
-															+1 punct (Rezultat corect)
+														<span >✓</span>
+														<span className="text-blue-400 font-bold">
+															+1 punct
 														</span>
 													</>
 												)}
 												{!isCorrectScore && !isCorrectOutcome && (
 													<>
-														<span className="text-2xl">❌</span>
+														<span >❌</span>
 														<span className="text-gray-400 font-medium">
 															0 puncte
 														</span>
@@ -184,8 +184,8 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 										</div>
 									</div>
 								) : (
-									<div className="p-4 rounded-lg bg-yellow-50 border border-yellow-200">
-										<div className="text-sm text-yellow-800 text-center">
+									<div className="p-4 rounded-lg bg-yellow-900/20 border border-yellow-700/50">
+										<div className="text-sm text-yellow-400 text-center">
 											⚠️ Nu ai făcut o predicție pentru acest meci
 										</div>
 									</div>
