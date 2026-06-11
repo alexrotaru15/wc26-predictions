@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { AdminTabs } from "@/components/admin/AdminTabs";
 import { Suspense } from "react";
+import { getFlagUrl } from "@/lib/flags";
+import { LocalDateTime } from "@/components/LocalDateTime";
 
 export default async function AdminPage({
 	searchParams,
@@ -169,19 +171,11 @@ export default async function AdminPage({
 											className="hover:bg-gray-900"
 										>
 											<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-												{new Date(match.scheduledAt).toLocaleDateString(
-													"ro-RO",
-													{
-														day: "numeric",
-														month: "short",
-														hour: "2-digit",
-														minute: "2-digit",
-													},
-												)}
+												<LocalDateTime date={match.scheduledAt} />
 											</td>
 											<td className="px-6 py-4 whitespace-nowrap">
 												<div className="flex items-center gap-2">
-													<span>{match.homeTeam.flagUrl}</span>
+													<img src={getFlagUrl(match.homeTeam.code)} alt={match.homeTeam.code} className="w-6 h-4 object-cover rounded-sm" />
 													<span className="font-medium">
 														{match.homeTeam.code}
 													</span>
@@ -189,7 +183,7 @@ export default async function AdminPage({
 													<span className="font-medium">
 														{match.awayTeam.code}
 													</span>
-													<span>{match.awayTeam.flagUrl}</span>
+													<img src={getFlagUrl(match.awayTeam.code)} alt={match.awayTeam.code} className="w-6 h-4 object-cover rounded-sm" />
 												</div>
 												{match.group && (
 													<div className="text-xs text-gray-500 mt-1">
@@ -262,19 +256,11 @@ export default async function AdminPage({
 											className="hover:bg-gray-900"
 										>
 											<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-												{new Date(match.scheduledAt).toLocaleDateString(
-													"ro-RO",
-													{
-														day: "numeric",
-														month: "short",
-														hour: "2-digit",
-														minute: "2-digit",
-													},
-												)}
+												<LocalDateTime date={match.scheduledAt} />
 											</td>
 											<td className="px-6 py-4 whitespace-nowrap">
 												<div className="flex items-center gap-2">
-													<span>{match.homeTeam.flagUrl}</span>
+													<img src={getFlagUrl(match.homeTeam.code)} alt={match.homeTeam.code} className="w-6 h-4 object-cover rounded-sm" />
 													<span className="font-medium text-gray-100">
 														{match.homeTeam.code}
 													</span>
@@ -282,7 +268,7 @@ export default async function AdminPage({
 													<span className="font-medium text-gray-100">
 														{match.awayTeam.code}
 													</span>
-													<span>{match.awayTeam.flagUrl}</span>
+													<img src={getFlagUrl(match.awayTeam.code)} alt={match.awayTeam.code} className="w-6 h-4 object-cover rounded-sm" />
 												</div>
 												{match.group && (
 													<div className="text-xs text-gray-500 mt-1">
