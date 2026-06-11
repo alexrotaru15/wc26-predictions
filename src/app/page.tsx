@@ -19,12 +19,10 @@ export default async function Home() {
 
 	const now = new Date();
 
-	// Fetch upcoming matches
+	// Fetch upcoming and live matches (not finished)
 	const matches = await prisma.match.findMany({
 		where: {
-			scheduledAt: {
-				gte: now,
-			},
+			isFinished: false,
 		},
 		include: {
 			homeTeam: {
