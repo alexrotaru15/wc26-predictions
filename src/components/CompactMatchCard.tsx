@@ -102,9 +102,16 @@ export function CompactMatchCard({ match }: { match: Match }) {
 				{/* Score Display or Input */}
 				<div className="flex items-center gap-1.5 flex-shrink-0">
 					{match.isFinished ? (
+					<div className="flex flex-col items-center gap-0.5">
 						<div className="text-lg font-bold text-gray-100">
 							{match.homeScore} - {match.awayScore}
 						</div>
+						{match.userPrediction && (
+							<div className="text-xs text-gray-500">
+								Tu: {match.userPrediction.homeScore} - {match.userPrediction.awayScore}
+							</div>
+						)}
+					</div>
 					) : canPredict ? (
 						<form
 							onSubmit={handleSubmit}

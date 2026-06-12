@@ -48,6 +48,9 @@ type Props = {
 export function DashboardTabs({ matches, teams }: Props) {
 	const [activeTab, setActiveTab] = useState<"all" | "groups">("groups");
 
+	// Filter unfinished matches for "All Matches" tab
+	const unfinishedMatches = matches.filter((match) => !match.isFinished);
+
 	return (
 		<div>
 			{/* Tabs */}
@@ -77,9 +80,9 @@ export function DashboardTabs({ matches, teams }: Props) {
 			{/* Tab Content */}
 			{activeTab === "all" ? (
 				<div>
-					{matches.length > 0 ? (
+					{unfinishedMatches.length > 0 ? (
 						<div className="grid grid-cols-1 gap-4">
-							{matches.map((match) => (
+							{unfinishedMatches.map((match) => (
 								<MatchCard
 									key={match.id}
 									match={match}
