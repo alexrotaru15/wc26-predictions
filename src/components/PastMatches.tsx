@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { getFlagUrl } from "@/lib/flags";
 
 type PastMatch = {
 	id: string;
@@ -40,13 +41,13 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 				onClick={() => setIsExpanded(!isExpanded)}
 				className="w-full bg-gray-800 border border-gray-700 rounded-lg p-4 hover:shadow-md transition flex items-center justify-between"
 			>
-				<div className="flex items-center gap-3">
-					<span className="text-xl">{isExpanded ? "▼" : "▶"}</span>
+				<div className="flex items-center gap-2">
+					<span className="text-lg">{isExpanded ? "▼" : "▶"}</span>
 					<div className="text-left">
-						<h2 className="text-lg font-bold text-gray-100">
+						<h2 className="text-xs font-bold text-gray-100">
 							Rezultate Anterioare
 						</h2>
-						<p className="text-sm text-gray-400">
+						<p className="text-xs text-gray-400">
 							{matches.length} finalizate{" "}
 							{matches.length === 1 ? "meci" : "meciuri"}
 						</p>
@@ -71,10 +72,10 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 						return (
 							<div
 								key={match.id}
-								className="bg-gray-800 border border-gray-700 rounded-lg p-6"
+								className="bg-gray-800 border border-gray-700 rounded-lg p-4"
 							>
 								{/* Match Header */}
-								<div className="flex justify-between items-center mb-4">
+								<div className="flex justify-between items-center mb-1">
 									<div className="flex items-center gap-2">
 										{isGroupStage && match.group && (
 											<span className="text-sm font-medium text-gray-500">
@@ -98,10 +99,14 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 								</div>
 
 								{/* Teams & Score */}
-								<div className="flex items-center justify-between mb-4">
+								<div className="flex items-center justify-between mb-1">
 									{/* Home Team */}
-									<div className="flex items-center gap-3 flex-1">
-										<span className="text-3xl">{match.homeTeam.flagUrl}</span>
+									<div className="flex items-center gap-1.5 flex-1">
+										<img
+											src={getFlagUrl(match.homeTeam.code)}
+											alt={match.homeTeam.code}
+											className="w-6 h-4 object-cover rounded flex-shrink-0"
+										/>
 										<div>
 											<div className="font-medium text-gray-100 text-sm">
 												{match.homeTeam.name}
@@ -113,15 +118,15 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 									</div>
 
 									{/* Final Score */}
-									<div className="text-center px-8">
-										<div className="text-2xl font-bold text-gray-100">
+									<div className="text-center px-2">
+										<div className="text-lg font-bold text-gray-100">
 											{match.homeScore} - {match.awayScore}
 										</div>
 										<div className="text-xs text-gray-500 mt-1">FT</div>
 									</div>
 
 									{/* Away Team */}
-									<div className="flex items-center gap-3 flex-1 justify-end">
+									<div className="flex items-center gap-1.5 flex-1 justify-end">
 										<div className="text-right">
 											<div className="font-medium text-gray-100 text-sm">
 												{match.awayTeam.name}
@@ -130,14 +135,18 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 												{match.awayTeam.code}
 											</div>
 										</div>
-										<span className="text-3xl">{match.awayTeam.flagUrl}</span>
+										<img
+											src={getFlagUrl(match.awayTeam.code)}
+											alt={match.awayTeam.code}
+											className="w-6 h-4 object-cover rounded flex-shrink-0"
+										/>
 									</div>
 								</div>
 
 								{/* User Prediction */}
 								{userPredicted ? (
 									<div
-										className={`p-3 rounded-lg ${
+										className={`p-1 rounded-lg ${
 											isCorrectScore
 												? "bg-green-900/30 border border-green-700"
 												: isCorrectOutcome
@@ -146,11 +155,9 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 										}`}
 									>
 										<div className="flex items-center justify-between">
-											<div className="flex items-center gap-4">
-												<div className="text-sm text-gray-400">
-													Predicția ta:
-												</div>
-												<div className="text-lg font-bold">
+											<div className="flex items-center gap-2">
+												<div className="text-xs text-gray-400">Tu:</div>
+												<div className="text-xs font-bold">
 													{match.userPrediction!.homeScore} -{" "}
 													{match.userPrediction!.awayScore}
 												</div>
@@ -158,7 +165,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 											<div className="flex items-center gap-2">
 												{isCorrectScore && (
 													<>
-														<span >🎯</span>
+														<span>🎯</span>
 														<span className="text-green-400 font-bold">
 															+3 puncte
 														</span>
@@ -166,7 +173,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 												)}
 												{isCorrectOutcome && (
 													<>
-														<span >✓</span>
+														<span>✓</span>
 														<span className="text-blue-400 font-bold">
 															+1 punct
 														</span>
@@ -174,7 +181,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 												)}
 												{!isCorrectScore && !isCorrectOutcome && (
 													<>
-														<span >❌</span>
+														<span>❌</span>
 														<span className="text-gray-400 font-medium">
 															0 puncte
 														</span>
@@ -184,7 +191,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 										</div>
 									</div>
 								) : (
-									<div className="p-4 rounded-lg bg-yellow-900/20 border border-yellow-700/50">
+									<div className="p-1 rounded-lg bg-yellow-900/20 border border-yellow-700/50">
 										<div className="text-sm text-yellow-400 text-center">
 											⚠️ Nu ai făcut o predicție pentru acest meci
 										</div>
