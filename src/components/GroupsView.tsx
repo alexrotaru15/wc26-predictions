@@ -4,6 +4,7 @@ import { useState } from "react";
 import { GroupStandings } from "./GroupStandings";
 import { ThirdPlaceStandings } from "./ThirdPlaceStandings";
 import { CompactMatchCard } from "./CompactMatchCard";
+import { KnockoutBracket } from "./KnockoutBracket";
 
 type Team = {
 	id: string;
@@ -255,6 +256,15 @@ export function GroupsView({ matches, teams }: Props) {
 		? thirdPlaceRanks.get(thirdPlaceTeam.team.id)
 		: undefined;
 
+	// Calculate standings for all groups for knockout bracket
+	const groupStandings: Record<string, TeamStanding[]> = {};
+	groups.forEach((group) => {
+		const groupTeams = teams.filter((t) => t.group === group);
+		const groupMatches = matches.filter((m) => m.group === group);
+		const standings = calculateStandings(groupTeams, groupMatches);
+		groupStandings[group] = applyTiebreaker(standings, groupMatches);
+	});
+
 	return (
 		<div className="space-y-6">
 			{/* Group Tabs */}
@@ -308,6 +318,12 @@ export function GroupsView({ matches, teams }: Props) {
 							<ThirdPlaceStandings thirdPlaceTeams={sortedThirdPlace} />
 						</div>
 					)}
+
+					{/* Knockout Bracket */}
+					<KnockoutBracket
+						groupStandings={groupStandings}
+						thirdPlaceTeams={sortedThirdPlace.slice(0, 8)}
+					/>
 				</div>
 			)}
 		</div>
