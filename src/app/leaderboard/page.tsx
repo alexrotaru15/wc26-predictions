@@ -94,9 +94,12 @@ export default async function LeaderboardPage() {
 		}
 	}
 
-	// Convert to array and sort by points
+	// Convert to array and sort by points, then by exact scores
 	const leaderboard = Array.from(userStats.values())
-		.sort((a, b) => b.points - a.points)
+		.sort((a, b) => {
+			if (b.points !== a.points) return b.points - a.points;
+			return b.correctScores - a.correctScores;
+		})
 		.map((entry, index) => ({
 			rank: index + 1,
 			...entry,
