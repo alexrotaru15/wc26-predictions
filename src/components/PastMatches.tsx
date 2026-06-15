@@ -39,7 +39,7 @@ export function PastMatches({ matches }: { matches: PastMatch[] }) {
 		<div className="mb-8">
 			<button
 				onClick={() => setIsExpanded(!isExpanded)}
-				className="w-full bg-gray-800 border border-gray-700 rounded-lg p-4 hover:shadow-md transition flex items-center justify-between"
+				className="w-full bg-gray-800 border border-gray-700 rounded-lg p-4 hover:shadow-md transition flex items-center justify-between cursor-pointer"
 			>
 				<div className="flex items-center gap-2">
 					<span className="text-lg">{isExpanded ? "▼" : "▶"}</span>
