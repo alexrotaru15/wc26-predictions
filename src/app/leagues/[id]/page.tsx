@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { CopyInviteLink } from "@/components/leagues/CopyInviteLink";
+import { UserPredictionsModal } from "@/components/UserPredictionsModal";
 
 export default async function LeagueLeaderboardPage({
 	params,
@@ -49,12 +50,19 @@ export default async function LeagueLeaderboardPage({
 		redirect("/leagues");
 	}
 
-	// Get all predictions for league members with points
+	// Get all predictions for league members with points or for matches that have started
 	const memberIds = league.members.map((m) => m.user.id);
 	const predictions = await prisma.prediction.findMany({
 		where: {
 			userId: { in: memberIds },
-			points: { not: null },
+			OR: [
+				{ points: { not: null } },
+				{
+					match: {
+						scheduledAt: { lte: new Date() },
+					},
+				},
+			],
 		},
 		include: {
 			user: {
@@ -63,6 +71,15 @@ export default async function LeagueLeaderboardPage({
 					name: true,
 					email: true,
 					image: true,
+				},
+			},
+			match: {
+				select: {
+					homeScore: true,
+					awayScore: true,
+					scheduledAt: true,
+					homeTeam: { select: { name: true, code: true } },
+					awayTeam: { select: { name: true, code: true } },
 				},
 			},
 		},
@@ -107,6 +124,16 @@ export default async function LeagueLeaderboardPage({
 		} else if (points === 1) {
 			stats.correctOutcomes++;
 		}
+	}
+
+	// Group predictions by user
+	const predictionsByUser = new Map<string, typeof predictions>();
+	for (const prediction of predictions) {
+		const userId = prediction.user.id;
+		if (!predictionsByUser.has(userId)) {
+			predictionsByUser.set(userId, []);
+		}
+		predictionsByUser.get(userId)!.push(prediction);
 	}
 
 	// Convert to array and sort by points, then by exact scores
@@ -257,11 +284,23 @@ export default async function LeagueLeaderboardPage({
 								<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
 									Predicții
 								</th>
+								<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+									Acțiuni
+								</th>
 							</tr>
 						</thead>
 						<tbody className="bg-gray-800 divide-y divide-gray-200">
 							{leaderboard.map((entry) => {
 								const isCurrentUser = entry.userId === session.user.id;
+								const rawPredictions =
+									predictionsByUser.get(entry.userId) || [];
+								const userPredictions = rawPredictions.map((p) => ({
+									...p,
+									match: {
+										...p.match,
+										date: p.match.scheduledAt.toISOString(),
+									},
+								}));
 								return (
 									<tr
 										key={entry.userId}
@@ -322,6 +361,13 @@ export default async function LeagueLeaderboardPage({
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
 											{entry.totalPredictions}
+										</td>
+										<td className="px-6 py-4 whitespace-nowrap text-center">
+											<UserPredictionsModal
+												userId={entry.userId}
+												userName={entry.userName}
+												predictions={userPredictions}
+											/>
 										</td>
 									</tr>
 								);
