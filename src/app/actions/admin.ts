@@ -114,6 +114,48 @@ export async function submitMatchResult({
 	}
 }
 
+export async function assignTeamsToMatch({
+	matchId,
+	homeTeamId,
+	awayTeamId,
+}: {
+	matchId: string;
+	homeTeamId: string | null;
+	awayTeamId: string | null;
+}) {
+	try {
+		const session = await auth();
+		if (!session?.user?.id) {
+			return { success: false, error: "Not authenticated" };
+		}
+
+		const user = await prisma.user.findUnique({
+			where: { id: session.user.id },
+			select: { isAdmin: true },
+		});
+
+		if (!user?.isAdmin) {
+			return { success: false, error: "Not authorized" };
+		}
+
+		await prisma.match.update({
+			where: { id: matchId },
+			data: {
+				homeTeamId: homeTeamId || null,
+				awayTeamId: awayTeamId || null,
+			},
+		});
+
+		revalidatePath("/admin");
+		revalidatePath("/");
+
+		return { success: true };
+	} catch (error) {
+		console.error("Error assigning teams:", error);
+		return { success: false, error: "Failed to assign teams" };
+	}
+}
+
 export async function createMatch({
 	stage,
 	homeTeamId,

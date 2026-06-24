@@ -83,6 +83,7 @@ enum MatchStage {
   ROUND_16
   QUARTER
   SEMI
+  THIRD_PLACE
   FINAL
 }
 
@@ -91,9 +92,11 @@ model Match {
   matchNumber Int         @unique
   stage       MatchStage
   group       String?
-  homeTeamId  String?
-  awayTeamId  String?
-  scheduledAt DateTime
+  homeTeamId    String?
+  awayTeamId    String?
+  homeTeamLabel String?
+  awayTeamLabel String?
+  scheduledAt   DateTime
   homeScore   Int?
   awayScore   Int?
   isFinished  Boolean     @default(false)
