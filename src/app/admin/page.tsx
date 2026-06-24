@@ -175,15 +175,39 @@ export default async function AdminPage({
 											</td>
 											<td className="px-6 py-4 whitespace-nowrap">
 												<div className="flex items-center gap-2">
-													<img src={getFlagUrl(match.homeTeam.code)} alt={match.homeTeam.code} className="w-6 h-4 object-cover rounded-sm" />
-													<span className="font-medium">
-														{match.homeTeam.code}
-													</span>
+													{match.homeTeam ? (
+														<>
+															<img
+																src={getFlagUrl(match.homeTeam.code)}
+																alt={match.homeTeam.code}
+																className="w-6 h-4 object-cover rounded-sm"
+															/>
+															<span className="font-medium">
+																{match.homeTeam.code}
+															</span>
+														</>
+													) : (
+														<span className="text-gray-500 font-mono text-sm">
+															{(match as any).homeTeamLabel ?? "TBD"}
+														</span>
+													)}
 													<span className="text-gray-400">vs</span>
-													<span className="font-medium">
-														{match.awayTeam.code}
-													</span>
-													<img src={getFlagUrl(match.awayTeam.code)} alt={match.awayTeam.code} className="w-6 h-4 object-cover rounded-sm" />
+													{match.awayTeam ? (
+														<>
+															<span className="font-medium">
+																{match.awayTeam.code}
+															</span>
+															<img
+																src={getFlagUrl(match.awayTeam.code)}
+																alt={match.awayTeam.code}
+																className="w-6 h-4 object-cover rounded-sm"
+															/>
+														</>
+													) : (
+														<span className="text-gray-500 font-mono text-sm">
+															{(match as any).awayTeamLabel ?? "TBD"}
+														</span>
+													)}
 												</div>
 												{match.group && (
 													<div className="text-xs text-gray-500 mt-1">
@@ -247,6 +271,9 @@ export default async function AdminPage({
 										<th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
 											Stage
 										</th>
+										<th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">
+											Actions
+										</th>
 									</tr>
 								</thead>
 								<tbody className="bg-gray-800 divide-y divide-gray-700">
@@ -260,15 +287,39 @@ export default async function AdminPage({
 											</td>
 											<td className="px-6 py-4 whitespace-nowrap">
 												<div className="flex items-center gap-2">
-													<img src={getFlagUrl(match.homeTeam.code)} alt={match.homeTeam.code} className="w-6 h-4 object-cover rounded-sm" />
-													<span className="font-medium text-gray-100">
-														{match.homeTeam.code}
-													</span>
+													{match.homeTeam ? (
+														<>
+															<img
+																src={getFlagUrl(match.homeTeam.code)}
+																alt={match.homeTeam.code}
+																className="w-6 h-4 object-cover rounded-sm"
+															/>
+															<span className="font-medium text-gray-100">
+																{match.homeTeam.code}
+															</span>
+														</>
+													) : (
+														<span className="text-gray-500 font-mono text-sm">
+															{(match as any).homeTeamLabel ?? "TBD"}
+														</span>
+													)}
 													<span className="text-gray-400">vs</span>
-													<span className="font-medium text-gray-100">
-														{match.awayTeam.code}
-													</span>
-													<img src={getFlagUrl(match.awayTeam.code)} alt={match.awayTeam.code} className="w-6 h-4 object-cover rounded-sm" />
+													{match.awayTeam ? (
+														<>
+															<span className="font-medium text-gray-100">
+																{match.awayTeam.code}
+															</span>
+															<img
+																src={getFlagUrl(match.awayTeam.code)}
+																alt={match.awayTeam.code}
+																className="w-6 h-4 object-cover rounded-sm"
+															/>
+														</>
+													) : (
+														<span className="text-gray-500 font-mono text-sm">
+															{(match as any).awayTeamLabel ?? "TBD"}
+														</span>
+													)}
 												</div>
 												{match.group && (
 													<div className="text-xs text-gray-500 mt-1">
@@ -283,6 +334,18 @@ export default async function AdminPage({
 												<span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
 													{match.stage}
 												</span>
+											</td>
+											<td className="px-6 py-4 whitespace-nowrap text-right text-sm">
+												{match.stage !== "GROUP" && (
+													<Link
+														href={`/admin/matches/${match.id}/teams`}
+														className="text-purple-400 hover:text-purple-300 font-medium"
+													>
+														{match.homeTeam && match.awayTeam
+															? "Edit Teams"
+															: "Assign Teams"}
+													</Link>
+												)}
 											</td>
 										</tr>
 									))}
