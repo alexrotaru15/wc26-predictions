@@ -68,7 +68,7 @@ const STAGE_LABELS: Record<string, string> = {
 };
 
 export function DashboardTabs({ matches, teams }: Props) {
-	const [activeTab, setActiveTab] = useState<"all" | "groups">("groups");
+	const [activeTab, setActiveTab] = useState<"all" | "groups">("all");
 
 	const upcomingGroupMatches = matches.filter(
 		(m) => !m.isFinished && m.stage === "GROUP",
