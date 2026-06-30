@@ -75,11 +75,14 @@ export function DashboardTabs({ matches, teams }: Props) {
 	);
 
 	const allKnockoutMatches = matches.filter((m) => m.stage !== "GROUP");
+	const upcomingKnockoutMatches = allKnockoutMatches.filter(
+		(m) => !m.isFinished,
+	);
 
 	const knockoutByStage = STAGE_ORDER.map((stage) => ({
 		stage,
 		label: STAGE_LABELS[stage],
-		matches: allKnockoutMatches
+		matches: upcomingKnockoutMatches
 			.filter((m) => m.stage === stage)
 			.sort(
 				(a, b) =>

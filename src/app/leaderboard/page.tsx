@@ -125,7 +125,9 @@ export default async function LeaderboardPage() {
 	const leaderboard = Array.from(userStats.values())
 		.sort((a, b) => {
 			if (b.points !== a.points) return b.points - a.points;
-			return b.correctScores - a.correctScores;
+			if (b.correctScores !== a.correctScores)
+				return b.correctScores - a.correctScores;
+			return a.totalPredictions - b.totalPredictions;
 		})
 		.map((entry, index) => ({
 			rank: index + 1,
